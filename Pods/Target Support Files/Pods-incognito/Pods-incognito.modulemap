@@ -1,0 +1,6 @@
+framework module Pods_incognito {
+  umbrella header "Pods-incognito-umbrella.h"
+
+  export *
+  module * { export * }
+}
