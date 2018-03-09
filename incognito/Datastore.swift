@@ -110,7 +110,8 @@ class DataStore {
                     let post_like = post["post_like"]
                     let post_comment = post["post_comment"]
         
-                    let newPost = Post(text:post_text!, image: post_image!, location: post_location!, time: post_time!,
+                    let newPost = Post(text:post_text!, image: post_image!,
+                                       location: post_location!, time: post_time!,
                                        like : [post_like!], comments: [post_comment!])
                     self.Posts.append(newPost)
                 }
