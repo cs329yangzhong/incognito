@@ -18,7 +18,7 @@ class DataStore {
     
     private var Users: [User]!
     private var Posts: [Post]!
-    
+    private var Comments: [Comment]!
     // Making the init method private means only this class can instantiate an object of this type.
     private init() {
         // Get a database reference.
@@ -137,6 +137,56 @@ class DataStore {
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Posts.append(post)
+    }
+    
+    // **********************************************************************
+    // *******************                               ********************
+    // ******************* load comment and add comment  ********************
+    // *******************                               ********************
+    // **********************************************************************
+    
+    func getComment(index:Int) ->Comment{
+        return Comments[index]
+    }
+    func loadComment(){
+        // Start with an empty array of User objects.
+        Comments = [Comment]()
+        // Fetch the data from Firebase and store it in our internal people array.
+        // This is a one-time listener.
+        ref.child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get the top-level dictionary.
+            let value = snapshot.value as? NSDictionary
+            if let comments = value{
+                // Iterate over the person objects and store in our internal people array.
+                for c in comments{
+                    let comment_id = c.key as! String
+                    let comment = c.value as! [String:String]
+                    let comment_time = comment["comment_time"]
+                    let comment_by = comment["comment_by"]
+                    let comment_text = comment["comment_text"]
+                    
+                    let newComment = Comment(text: comment_text!, comment_by: comment_by!, time: comment_text!)
+                    self.Comments.append(newComment)
+                }
+            }
+            
+        }) {
+            (error) in
+            print(error.localizedDescription)
+        }
+    }
+    func addComment(comment:Comment){
+        // define array of key/value pairs to store for this comment.
+        let commentRecord = [
+            "comment_time": comment.time,
+            "comment_by": comment.comment_by,
+            "comment_text": comment.text
+        ]
+        //        save to Firebase
+        self.ref.child("comments").childByAutoId().setValue(commentRecord)
+        //        also save to our internal array, to stay in sync with what's in Firebase
+        Comments.append(comment)
+        
     }
 }
 
