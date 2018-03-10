@@ -701,10 +701,20 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="INCOGNITO-1" translatesAutoresizingMaskIntoConstraints="NO" id="NLP-Va-DCF">
-                                            <rect key="frame" x="19" y="178" width="340" height="187"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon2" translatesAutoresizingMaskIntoConstraints="NO" id="NLP-Va-DCF">
+                                            <rect key="frame" x="19" y="178" width="326" height="163"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJ3-8k-5Bk">
+                                            <rect key="frame" x="27" y="349" width="23" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="12" image="like_icon"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3O-ah-Bxa">
+                                            <rect key="frame" x="81" y="349" width="14" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="comment_icon"/>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -738,7 +748,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="INCOGNITO-1" translatesAutoresizingMaskIntoConstraints="NO" id="r27-aH-h2u">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon2" translatesAutoresizingMaskIntoConstraints="NO" id="r27-aH-h2u">
                                 <rect key="frame" x="16" y="167" width="245" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -825,7 +835,6 @@
     <resources>
         <image name="Discover and Share y" width="200" height="13"/>
         <image name="Group 3" width="63" height="64"/>
-        <image name="INCOGNITO-1" width="133" height="19"/>
         <image name="Login buttn-1" width="295" height="48"/>
         <image name="Login buttn-2" width="295" height="62"/>
         <image name="Rectangle 2" width="327" height="350"/>
@@ -836,7 +845,9 @@
         <image name="add_location" width="20" height="24"/>
         <image name="add_post_front" width="375" height="89"/>
         <image name="back_shadow" width="304" height="218"/>
+        <image name="comment_icon" width="14" height="14"/>
         <image name="icon2" width="600" height="600"/>
+        <image name="like_icon" width="15" height="15"/>
         <image name="stroke" width="10" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
