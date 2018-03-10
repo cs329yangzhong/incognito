@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		377ABAC2E7FE38D531F78637 /* Pods_incognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3BA58840EAE54469BDB92D /* Pods_incognito.framework */; };
+		5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B06205461200005E651 /* SignInViewController.swift */; };
+		5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B082054613E0005E651 /* SignUpViewController.swift */; };
+		5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B0A205468960005E651 /* AddPostViewController.swift */; };
 		5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA199204B3419005E0972 /* AppDelegate.swift */; };
-		5D9BA19C204B3419005E0972 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA19B204B3419005E0972 /* ViewController.swift */; };
 		5D9BA19F204B3419005E0972 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA19D204B3419005E0972 /* Main.storyboard */; };
 		5D9BA1A1204B3419005E0972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA1A0204B3419005E0972 /* Assets.xcassets */; };
 		5D9BA1A4204B3419005E0972 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA1A2204B3419005E0972 /* LaunchScreen.storyboard */; };
@@ -21,9 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D6E3B06205461200005E651 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		5D6E3B082054613E0005E651 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		5D6E3B0A205468960005E651 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		5D9BA196204B3419005E0972 /* incognito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = incognito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9BA199204B3419005E0972 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5D9BA19B204B3419005E0972 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5D9BA19E204B3419005E0972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D9BA1A0204B3419005E0972 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D9BA1A3204B3419005E0972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,6 +71,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5D6E3B0C2054699B0005E651 /* Viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				5D6E3B082054613E0005E651 /* SignUpViewController.swift */,
+				5D6E3B06205461200005E651 /* SignInViewController.swift */,
+				5D6E3B0A205468960005E651 /* AddPostViewController.swift */,
+			);
+			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
 		5D9BA18D204B3419005E0972 = {
 			isa = PBXGroup;
 			children = (
@@ -90,7 +104,7 @@
 			children = (
 				5D9BA1AB204B34EE005E0972 /* GoogleService-Info.plist */,
 				5D9BA199204B3419005E0972 /* AppDelegate.swift */,
-				5D9BA19B204B3419005E0972 /* ViewController.swift */,
+				5D6E3B0C2054699B0005E651 /* Viewcontrollers */,
 				5D9BA19D204B3419005E0972 /* Main.storyboard */,
 				5D9BA1AD204B5AFC005E0972 /* Datastore.swift */,
 				5D9BA1AF204B5B3D005E0972 /* User.swift */,
@@ -238,8 +252,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,
+				5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */,
 				5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */,
-				5D9BA19C204B3419005E0972 /* ViewController.swift in Sources */,
+				5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */,
+				5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */,
 				5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */,
 				5D9BA1AE204B5AFC005E0972 /* Datastore.swift in Sources */,
 				5D9BA1B2204B5B53005E0972 /* Post.swift in Sources */,
