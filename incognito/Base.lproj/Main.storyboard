@@ -580,16 +580,6 @@
                                 <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KxO-uH-Cul">
-                                <rect key="frame" x="16" y="15" width="20" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="gFd-S2-7uY"/>
-                                </constraints>
-                                <state key="normal" image="stroke"/>
-                                <connections>
-                                    <segue destination="7dD-zq-AV0" kind="show" id="Fjy-N3-INY"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Say something..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-8w-B0F">
                                 <rect key="frame" x="16" y="87" width="343" height="177"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -601,6 +591,13 @@
                                 <rect key="frame" x="16" y="364" width="21" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7z-m0-TA2">
+                                <rect key="frame" x="45" y="362" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="location">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8S-ZN-WkQ">
                                 <rect key="frame" x="16" y="272" width="65" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -611,12 +608,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7z-m0-TA2">
-                                <rect key="frame" x="45" y="362" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="location">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KxO-uH-Cul">
+                                <rect key="frame" x="5" y="15" width="76" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="gFd-S2-7uY"/>
+                                </constraints>
+                                <state key="normal" title="Cancel" image="stroke"/>
+                                <connections>
+                                    <segue destination="2Cz-9W-fgS" kind="show" id="XlW-tp-ZCn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -630,8 +630,8 @@
                             <constraint firstItem="wn0-Bb-W9J" firstAttribute="top" secondItem="u0d-wR-UWY" secondAttribute="top" id="bT0-2h-rau"/>
                             <constraint firstItem="KxO-uH-Cul" firstAttribute="centerY" secondItem="FZP-d0-09z" secondAttribute="centerY" id="dpc-v4-xGm"/>
                             <constraint firstItem="wn0-Bb-W9J" firstAttribute="centerY" secondItem="Jxn-lw-MXQ" secondAttribute="centerY" constant="13.5" id="mff-OZ-3Dm"/>
-                            <constraint firstItem="FZP-d0-09z" firstAttribute="leading" secondItem="KxO-uH-Cul" secondAttribute="trailing" constant="98" id="tbJ-wa-TIm"/>
-                            <constraint firstItem="KxO-uH-Cul" firstAttribute="leading" secondItem="u0d-wR-UWY" secondAttribute="leadingMargin" id="xHP-yM-XNZ"/>
+                            <constraint firstItem="FZP-d0-09z" firstAttribute="leading" secondItem="KxO-uH-Cul" secondAttribute="trailing" constant="53" id="tbJ-wa-TIm"/>
+                            <constraint firstItem="KxO-uH-Cul" firstAttribute="leading" secondItem="u0d-wR-UWY" secondAttribute="leadingMargin" constant="-11" id="xHP-yM-XNZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rPM-fU-FwM"/>
                     </view>
@@ -639,7 +639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXn-PC-Pfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3165.5999999999999" y="-1635.832083958021"/>
+            <point key="canvasLocation" x="2409" y="-1577"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Nud-hI-Vix">
@@ -742,7 +742,7 @@
         <image name="stroke" width="10" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fjy-N3-INY"/>
+        <segue reference="XlW-tp-ZCn"/>
         <segue reference="wjO-qC-Z7y"/>
     </inferredMetricsTieBreakers>
 </document>
