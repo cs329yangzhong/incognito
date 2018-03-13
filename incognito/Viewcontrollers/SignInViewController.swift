@@ -12,6 +12,7 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var UserNameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
+    
     @IBAction func LoginAction(_ sender: Any) {
         
         // Check the Username and Password.
@@ -28,7 +29,7 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+
     // dismiss keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

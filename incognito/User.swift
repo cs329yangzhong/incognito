@@ -9,7 +9,6 @@
 import Foundation
 class User {
     
-    var id: String
     var username: String
     var password: String
     var email: String
@@ -18,8 +17,7 @@ class User {
     var gender: String
     var avatar: String
     
-    init(id: String, username: String, password: String, email: String,class_year: String,posts :[String], gender: String,avatar: String) {
-        self.id = id
+    init(username: String, password: String, email: String,class_year: String,posts :[String], gender: String,avatar: String) {
         self.username = username
         self.password = password
         self.email = email
