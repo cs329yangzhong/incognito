@@ -53,7 +53,8 @@ class DataStore {
                     let gender = user["gender"]
                     let avatar = user["avatar"]
                     
-                    let newUser = User(id: id, username: username!, password: password!, email:email! ,class_year: class_year!,
+                    let newUser = User(id: id, username: username!, password: password!,
+                                       email:email! ,class_year: class_year!,
                                        posts : [posts!], gender: gender!, avatar: avatar!)
                     self.Users.append(newUser)
                 }

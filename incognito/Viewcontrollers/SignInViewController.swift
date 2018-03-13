@@ -9,18 +9,20 @@
 import UIKit
 
 class SignInViewController: UIViewController {
-
+    
     @IBOutlet weak var UserNameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-    
     @IBAction func LoginAction(_ sender: Any) {
+        
+        // Check the Username and Password.
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
