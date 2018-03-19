@@ -6,6 +6,8 @@ target 'incognito' do
   use_frameworks!
   pod 'Firebase/Core'
   pod ‘Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   # Pods for incognito
 
 end

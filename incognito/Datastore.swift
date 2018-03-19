@@ -44,7 +44,7 @@ class DataStore {
                 // Iterate over the person objects and store in our internal people array.
                 for p in users {
                     let id = p.key as! String
-                    let user = p.value as! [String:String]
+                    let user = p.value as! [String:Any]
                     let username = user["username"]
                     let password = user["password"]
                     let email = user["email"]
@@ -52,10 +52,14 @@ class DataStore {
                     let posts = user["posts"]
                     let gender = user["gender"]
                     let avatar = user["avatar"]
-                    
-                    let newUser = User(username: username!, password: password!,
-                                       email:email! ,class_year: class_year!,
-                                       posts : [posts!], gender: gender!, avatar: avatar!)
+                    print(avatar)
+                    let newUser = User(username: username! as! String,
+                                       password: password! as! String,
+                                       email:email! as! String ,
+                                       class_year: class_year! as! String,
+                                       posts : posts as! [String],
+                                       gender: gender! as! String,
+                                       avatar: avatar! as! String )
                     self.Users.append(newUser)
                 }
             }
@@ -73,7 +77,7 @@ class DataStore {
             "class_year": user.class_year,
             "posts": user.posts,
             "gender" : user.gender,
-            "avator" : user.avatar,
+            "avatar" : user.avatar,
             ] as [String : Any]
         
         // Save to Firebase.

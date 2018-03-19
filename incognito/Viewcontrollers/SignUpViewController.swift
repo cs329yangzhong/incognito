@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 
-
 class SignUpViewController: UIViewController {
     
     // Create variables.
@@ -20,13 +19,30 @@ class SignUpViewController: UIViewController {
     
     @IBAction func ConfirmSignUp(_ sender: Any) {
         
+        // Test password matching.
+        if (PasswordTextField.text! != CheckPasswordTextField.text!){
+            let alert = UIAlertController(title: "Alert",
+                                          message: "You must enter the same passwords",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        Auth.auth().createUser(withEmail: EmailTextField.text!,
+                               password: PasswordTextField.text!)
+                            { (user, error) in}
+        print(Auth.auth().currentUser)
+    
         let User1 = User(username: UsernameTextField.text!,
                          password: PasswordTextField.text!,
                          email: EmailTextField.text!,
-                         class_year: "Fresh", posts: [],
-                         gender: "male", avatar: "None")
-        DataStore.shared.addUser(user: User1)
-
+                         class_year: "Fresh",
+                         posts: ["None"],
+                         gender: "male",
+                         avatar: "None")
+         DataStore.shared.addUser(user: User1)
+        print("save")
     }
     
     override func viewDidLoad() {

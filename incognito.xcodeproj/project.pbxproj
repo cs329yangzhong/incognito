@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		377ABAC2E7FE38D531F78637 /* Pods_incognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3BA58840EAE54469BDB92D /* Pods_incognito.framework */; };
+		5D58A2E9205CD10B00108265 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D58A2E8205CD10B00108265 /* SplashViewController.swift */; };
+		5D58A2EB205F5EE800108265 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D58A2EA205F5EE800108265 /* ProfileViewController.swift */; };
 		5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B06205461200005E651 /* SignInViewController.swift */; };
 		5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B082054613E0005E651 /* SignUpViewController.swift */; };
 		5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B0A205468960005E651 /* AddPostViewController.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D58A2E8205CD10B00108265 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		5D58A2EA205F5EE800108265 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5D6E3B06205461200005E651 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5D6E3B082054613E0005E651 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5D6E3B0A205468960005E651 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				5D6E3B082054613E0005E651 /* SignUpViewController.swift */,
 				5D6E3B06205461200005E651 /* SignInViewController.swift */,
 				5D6E3B0A205468960005E651 /* AddPostViewController.swift */,
+				5D58A2E8205CD10B00108265 /* SplashViewController.swift */,
+				5D58A2EA205F5EE800108265 /* ProfileViewController.swift */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -229,12 +235,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-incognito/Pods-incognito-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -253,7 +261,9 @@
 			files = (
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,
 				5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */,
+				5D58A2EB205F5EE800108265 /* ProfileViewController.swift in Sources */,
 				5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */,
+				5D58A2E9205CD10B00108265 /* SplashViewController.swift in Sources */,
 				5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */,
 				5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */,
 				5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */,
