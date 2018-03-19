@@ -8,6 +8,7 @@
 
 import Foundation
 class Post {
+    var uid: String
     var text: String
     var image: String
     var location: String
@@ -15,7 +16,8 @@ class Post {
     var like = [String]()
     var comments = [String]()
     
-    init(text: String, image: String,location: String, time: String, like: [String], comments: [String]) {
+    init(uid: String, text: String, image: String,location: String, time: String, like: [String], comments: [String]) {
+        self.uid = uid
         self.text = text
         self.image = image
         self.location = location

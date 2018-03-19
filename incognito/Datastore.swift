@@ -52,7 +52,6 @@ class DataStore {
                     let posts = user["posts"]
                     let gender = user["gender"]
                     let avatar = user["avatar"]
-                    print(avatar)
                     let newUser = User(username: username! as! String,
                                        password: password! as! String,
                                        email:email! as! String ,
@@ -68,7 +67,7 @@ class DataStore {
         }
     }
     
-    func addUser(user: User) {
+    func addUser(id: String, user: User) {
         // define array of key/value pairs to store for this person.
         let userRecord = [
             "username": user.username,
@@ -81,7 +80,7 @@ class DataStore {
             ] as [String : Any]
         
         // Save to Firebase.
-        self.ref.child("users").childByAutoId().setValue(userRecord)
+        self.ref.child("users").child(id).setValue(userRecord)
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Users.append(user)
@@ -107,7 +106,8 @@ class DataStore {
                 // Iterate over the person objects and store in our internal people array.
                 for p in posts {
                     let post_id = p.key as! String
-                    let post = p.value as! [String:String]
+                    let post = p.value as! [String:Any]
+                    let post_user = post["uid"]
                     let post_image = post["post_image"]
                     let post_location = post["post_location"]
                     let post_text = post["post_text"]
@@ -115,9 +115,13 @@ class DataStore {
                     let post_like = post["post_like"]
                     let post_comment = post["post_comment"]
         
-                    let newPost = Post(text:post_text!, image: post_image!,
-                                       location: post_location!, time: post_time!,
-                                       like : [post_like!], comments: [post_comment!])
+                    let newPost = Post(uid:post_user as! String,
+                                       text:post_text as! String,
+                                       image: post_image as! String,
+                                       location: post_location as! String,
+                                       time: post_time as! String,
+                                       like : post_like as! [String],
+                                       comments: post_comment as! [String])
                     self.Posts.append(newPost)
                 }
             }
@@ -130,6 +134,7 @@ class DataStore {
     func addPost(post: Post) {
         // define array of key/value pairs to store for this person.
         let postRecord:[String:Any] = [
+            "post_user": post.uid,
             "post_image": post.image,
             "post_location": post.location,
             "post_text": post.text,
@@ -138,7 +143,23 @@ class DataStore {
             "post_comment" : post.comments
             ]
         // Save to Firebase.
-        self.ref.child("posts").childByAutoId().setValue(postRecord)
+        let key = self.ref.child("posts").childByAutoId().key
+        
+        self.ref.child("posts").child(key).setValue(postRecord)
+        // Update the user's post list.
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child(userID!).child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSArray
+            var post_list = value as! [String]
+            post_list.append(key)
+            self.ref.child("users").child(userID!).updateChildValues(["posts" : post_list])
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Posts.append(post)
@@ -156,21 +177,27 @@ class DataStore {
     func loadComment(){
         // Start with an empty array of User objects.
         Comments = [Comment]()
-        // Fetch the data from Firebase and store it in our internal people array.
+        // Fetch the data from Firebase and store it in our internal Comments array.
         // This is a one-time listener.
         ref.child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get the top-level dictionary.
             let value = snapshot.value as? NSDictionary
             if let comments = value{
                 // Iterate over the person objects and store in our internal people array.
-                for c in comments{
+                for c in comments {
                     let comment_id = c.key as! String
-                    let comment = c.value as! [String:String]
+                    let comment = c.value as! [String:Any]
+                    let comment_uid = comment["comment_uid"]
+                    let comment_postid = comment["postid"]
                     let comment_time = comment["comment_time"]
                     let comment_by = comment["comment_by"]
                     let comment_text = comment["comment_text"]
                     
-                    let newComment = Comment(text: comment_text!, comment_by: comment_by!, time: comment_text!)
+                    let newComment = Comment(uid: comment_uid as! String,
+                                             post_id: comment_postid as! String,
+                                             text: comment_text as! String,
+                                             comment_by: comment_by! as! [String],
+                                             time: comment_text! as! String)
                     self.Comments.append(newComment)
                 }
             }
@@ -186,7 +213,8 @@ class DataStore {
             "comment_time": comment.time,
             "comment_by": comment.comment_by,
             "comment_text": comment.text
-        ]
+            ] as [String : Any]
+        
         //        save to Firebase
         self.ref.child("comments").childByAutoId().setValue(commentRecord)
         //        also save to our internal array, to stay in sync with what's in Firebase

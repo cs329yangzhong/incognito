@@ -8,12 +8,15 @@
 
 import Foundation
 class Comment {
-    
+    var uid: String
+    var post_id: String
     var text: String
-    var comment_by: String
+    var comment_by = [String]()
     var time: String
     
-    init(text: String, comment_by: String, time: String) {
+    init(uid: String, post_id:String, text: String, comment_by: [String], time: String) {
+        self.uid = uid
+        self.post_id = post_id
         self.text = text
         self.comment_by = comment_by
         self.time = time

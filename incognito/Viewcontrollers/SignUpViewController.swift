@@ -29,20 +29,22 @@ class SignUpViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        Auth.auth().createUser(withEmail: EmailTextField.text!,
-                               password: PasswordTextField.text!)
-                            { (user, error) in}
-        print(Auth.auth().currentUser)
-    
-        let User1 = User(username: UsernameTextField.text!,
-                         password: PasswordTextField.text!,
-                         email: EmailTextField.text!,
-                         class_year: "Fresh",
-                         posts: ["None"],
-                         gender: "male",
-                         avatar: "None")
-         DataStore.shared.addUser(user: User1)
+        Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
+                        { (user, error) in
+                        print(Auth.auth().currentUser)
+                        let User1 = User(username: self.UsernameTextField.text!,
+                                         password: self.PasswordTextField.text!,
+                                         email: self.EmailTextField.text!,
+                                         class_year: "Fresh",
+                                         posts: ["None"],
+                                         gender: "male",
+                                         avatar: "None")
+                        DataStore.shared.addUser(id: (user?.uid)!,user: User1)
+        if Auth.auth().currentUser == nil {
+            self.performSegue(withIdentifier: "Signup_to_Signin", sender: self)
+                            }
         print("save")
+        }
     }
     
     override func viewDidLoad() {

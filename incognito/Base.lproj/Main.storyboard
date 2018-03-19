@@ -196,7 +196,6 @@
                                 <state key="normal" image="Login buttn-1"/>
                                 <connections>
                                     <action selector="LoginAction:" destination="f1O-9O-wM1" eventType="touchUpInside" id="3QM-oC-ba9"/>
-                                    <segue destination="2Cz-9W-fgS" kind="showDetail" identifier="do_signin" action="showViewController:sender:" id="PcM-b0-Xnq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVM-34-atS">
@@ -290,11 +289,12 @@
                     <connections>
                         <outlet property="EmailTextField" destination="MBm-v3-q1E" id="mJ4-x7-Lll"/>
                         <outlet property="PasswordTextField" destination="2Pb-OI-CLd" id="ulS-fM-8F0"/>
+                        <segue destination="2Cz-9W-fgS" kind="show" identifier="do_signin" id="3mC-eT-NRS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdH-QC-tbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852" y="-440.32983508245883"/>
+            <point key="canvasLocation" x="929" y="-571"/>
         </scene>
         <!--Signup-->
         <scene sceneID="IFC-Lx-eNu">
@@ -441,6 +441,7 @@
                                 <state key="normal" image="Login buttn-2"/>
                                 <connections>
                                     <action selector="ConfirmSignUp:" destination="cPR-6b-rLr" eventType="touchUpInside" id="ows-4q-Zkd"/>
+                                    <segue destination="f1O-9O-wM1" kind="show" identifier="Signup_to_Signin" id="nbg-eP-0CS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGr-GJ-JOn">
@@ -596,6 +597,9 @@
                                 <state key="normal" title="POST">
                                     <color key="titleColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 </state>
+                                <connections>
+                                    <action selector="DidAddPost:" destination="uYz-u2-Qss" eventType="touchUpInside" id="pIU-vF-MeO"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZP-d0-09z">
                                 <rect key="frame" x="134" y="0.0" width="107" height="52"/>
@@ -637,9 +641,6 @@
                                     <constraint firstAttribute="width" constant="76" id="gFd-S2-7uY"/>
                                 </constraints>
                                 <state key="normal" title="Cancel" image="stroke"/>
-                                <connections>
-                                    <segue destination="2Cz-9W-fgS" kind="show" id="XlW-tp-ZCn"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -659,6 +660,9 @@
                         <viewLayoutGuide key="safeArea" id="rPM-fU-FwM"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" id="g4j-wm-cz5"/>
+                    <connections>
+                        <outlet property="textfield" destination="0BK-8w-B0F" id="eLU-gj-GO5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXn-PC-Pfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -891,8 +895,7 @@
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PcM-b0-Xnq"/>
         <segue reference="wjO-qC-Z7y"/>
-        <segue reference="Mxr-cW-Y5N"/>
+        <segue reference="nbg-eP-0CS"/>
     </inferredMetricsTieBreakers>
 </document>

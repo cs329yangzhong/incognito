@@ -15,11 +15,9 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var PasswordTextField: UITextField!
 
     @IBAction func LoginAction(_ sender: Any) {
-        print(Auth.auth().currentUser)
-    
-        
+
         // Checking empty fields.
-        if (EmailTextField.text! == "" || PasswordTextField.text! == "||"){
+        if (EmailTextField.text! == "" || PasswordTextField.text! == ""){
         let alert = UIAlertController(title: "Alert",
                                       message: "Please enter both email and password.",
                                       preferredStyle: UIAlertControllerStyle.alert)
@@ -29,17 +27,22 @@ class SignInViewController: UIViewController {
         }
         
         Auth.auth().signIn(withEmail: EmailTextField.text!, password:PasswordTextField.text!) { (user, error) in
+            
             //check that user is not nil.
-            if let u = user {
-                self.performSegue(withIdentifier: "do_signin", sender: self)
-            }
-            else{
+            if let error = error {
+                print(error.localizedDescription)
+                print()
                 let alert = UIAlertController(title: "Alert",
                                               message: "User does not exist or wrong password",
                                               preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "ok", style:
-                    UIAlertActionStyle.default, handler: nil))
+                                UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                return
+            }
+            else if let user = user {
+                print("Successly Logged in")
+                self.performSegue(withIdentifier: "do_signin", sender: nil)
             }
         }
 
