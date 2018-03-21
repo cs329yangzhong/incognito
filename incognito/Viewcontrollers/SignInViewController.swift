@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
@@ -49,6 +49,8 @@ class SignInViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.EmailTextField.delegate = self;
+        self.PasswordTextField.delegate = self;
         
         // Do any additional setup after loading the view.
     }
@@ -60,11 +62,14 @@ class SignInViewController: UIViewController {
     
 
     // dismiss keyboard
+    // when click the return, the keyboard will hide automatically.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        self.view.endEditing(true)
+        return false
     }
+    
+    // if the user touched anywhere outside of the keyboard, the keyboard will hide.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }    
+    }
 }

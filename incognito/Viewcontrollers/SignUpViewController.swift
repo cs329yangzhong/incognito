@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     // Create variables.
     @IBOutlet weak var UsernameTextField: UITextField!
@@ -50,6 +50,10 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.UsernameTextField.delegate = self;
+        self.PasswordTextField.delegate = self;
+        self.CheckPasswordTextField.delegate = self;
+        self.EmailTextField.delegate = self;
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,10 +77,13 @@ class SignUpViewController: UIViewController {
     
     
     // dismiss keyboard
+    // when click the return, the keyboard will hide automatically.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        self.view.endEditing(true)
+        return false
     }
+    
+    // if the user touched anywhere outside of the keyboard, the keyboard will hide.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

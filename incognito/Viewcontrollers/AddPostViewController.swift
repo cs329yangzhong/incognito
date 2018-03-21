@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-class AddPostViewController: UIViewController {
+class AddPostViewController: UIViewController,UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +46,5 @@ class AddPostViewController: UIViewController {
     */
     
     // dismiss keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+    
 }
