@@ -22,15 +22,17 @@ class AddPostViewController: UIViewController {
     }
     
     @IBOutlet weak var textfield: UITextView!
-    
     @IBAction func DidAddPost(_ sender: Any) {
         let id = Auth.auth().currentUser?.uid
-        let post = Post(uid: id!, text: textfield.text!, image: "none", location: "none", time: "none", like: ["none"], comments: ["none"])
+        let post = Post(uid: id!,
+                        text: textfield.text!,
+                        image: "none",
+                        location: "none",
+                        time: "none",
+                        like: ["none"],
+                        comments: ["none"])
         DataStore.shared.addPost(post: post)
         print("Successfully saved post")
-        
-        
-        
     }
     
     /*

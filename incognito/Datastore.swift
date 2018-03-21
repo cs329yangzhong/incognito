@@ -107,7 +107,7 @@ class DataStore {
                 for p in posts {
                     let post_id = p.key as! String
                     let post = p.value as! [String:Any]
-                    let post_user = post["uid"]
+                    let post_user = post["post_user"]
                     let post_image = post["post_image"]
                     let post_location = post["post_location"]
                     let post_text = post["post_text"]

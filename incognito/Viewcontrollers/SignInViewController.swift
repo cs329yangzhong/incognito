@@ -26,7 +26,8 @@ class SignInViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         }
         
-        Auth.auth().signIn(withEmail: EmailTextField.text!, password:PasswordTextField.text!) { (user, error) in
+        Auth.auth().signIn(withEmail: EmailTextField.text!,
+                           password:PasswordTextField.text!){ (user, error) in
             
             //check that user is not nil.
             if let error = error {
@@ -45,9 +46,6 @@ class SignInViewController: UIViewController {
                 self.performSegue(withIdentifier: "do_signin", sender: nil)
             }
         }
-
-        // Check the Username and Password.
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
