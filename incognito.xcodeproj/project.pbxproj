@@ -13,6 +13,8 @@
 		5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B06205461200005E651 /* SignInViewController.swift */; };
 		5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B082054613E0005E651 /* SignUpViewController.swift */; };
 		5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B0A205468960005E651 /* AddPostViewController.swift */; };
+		5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD492066DFA300AA7716 /* PlaceViewController.swift */; };
+		5D95CD4C2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */; };
 		5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA199204B3419005E0972 /* AppDelegate.swift */; };
 		5D9BA19F204B3419005E0972 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA19D204B3419005E0972 /* Main.storyboard */; };
 		5D9BA1A1204B3419005E0972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA1A0204B3419005E0972 /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 		5D6E3B06205461200005E651 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5D6E3B082054613E0005E651 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5D6E3B0A205468960005E651 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		5D95CD492066DFA300AA7716 /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
+		5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgCollectionControllerCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D9BA196204B3419005E0972 /* incognito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = incognito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9BA199204B3419005E0972 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D9BA19E204B3419005E0972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				5D6E3B082054613E0005E651 /* SignUpViewController.swift */,
 				5D6E3B06205461200005E651 /* SignInViewController.swift */,
 				5D6E3B0A205468960005E651 /* AddPostViewController.swift */,
+				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
+				5D95CD492066DFA300AA7716 /* PlaceViewController.swift */,
 				5D58A2E8205CD10B00108265 /* SplashViewController.swift */,
 				5D58A2EA205F5EE800108265 /* ProfileViewController.swift */,
 			);
@@ -219,9 +225,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-incognito/Pods-incognito-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -259,11 +272,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */,
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,
 				5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */,
 				5D58A2EB205F5EE800108265 /* ProfileViewController.swift in Sources */,
 				5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */,
 				5D58A2E9205CD10B00108265 /* SplashViewController.swift in Sources */,
+				5D95CD4C2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift in Sources */,
 				5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */,
 				5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */,
 				5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */,

@@ -13,7 +13,8 @@ class DataStore {
     
     // Instantiate the singleton object.
     static let shared = DataStore()
-    
+    static let storage = Storage.storage()
+
     private var ref: DatabaseReference!
     
     private var Users: [User]!
@@ -80,7 +81,7 @@ class DataStore {
             ] as [String : Any]
         
         // Save to Firebase.
-        self.ref.child("users").child(id).setValue(userRecord)
+    self.ref.child("users").child(id).setValue(userRecord)
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Users.append(user)
