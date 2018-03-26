@@ -64,7 +64,7 @@
                                     <segue destination="cPR-6b-rLr" kind="show" identifier="SplashToSignup" id="0yb-wg-8Sj"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="w5w-8f-r8E">
+                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallpaper" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5w-8f-r8E">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -668,7 +668,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ey-Ef-5fS">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ey-Ef-5fS">
                                                     <rect key="frame" x="-87" y="-39" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="VFE-DH-zKI"/>
@@ -677,16 +677,18 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="4Ey-Ef-5fS" firstAttribute="top" secondItem="gIr-A2-78e" secondAttribute="topMargin" constant="-59" id="7wT-Uw-BdD"/>
+                                            <constraint firstItem="4Ey-Ef-5fS" firstAttribute="top" secondItem="gIr-A2-78e" secondAttribute="topMargin" constant="-47" id="7wT-Uw-BdD"/>
                                             <constraint firstItem="4Ey-Ef-5fS" firstAttribute="centerY" secondItem="gIr-A2-78e" secondAttribute="centerY" id="S0N-57-V5p"/>
                                             <constraint firstItem="4Ey-Ef-5fS" firstAttribute="leading" secondItem="gIr-A2-78e" secondAttribute="leading" constant="-87" id="y0P-4T-Ov9"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="ImgView" destination="4Ey-Ef-5fS" id="5kK-zC-OkX"/>
-                                            <outlet property="img" destination="4Ey-Ef-5fS" id="K7b-uR-TRM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="uYz-u2-Qss" id="IbR-q2-yPR"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrV-QM-TgN">
                                 <rect key="frame" x="52" y="367" width="66" height="21"/>
@@ -902,35 +904,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW5-Q7-J0z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW5-Q7-J0z">
                                 <rect key="frame" x="137" y="323" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nJ-oc-zOA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nJ-oc-zOA">
                                 <rect key="frame" x="161" y="560" width="52" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log out"/>
                                 <connections>
                                     <action selector="Logout:" destination="eX6-F2-bzV" eventType="touchUpInside" id="Onp-K3-4j2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpZ-EO-jWZ">
-                                <rect key="frame" x="231" y="184" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hXK-UP-LP7">
+                                <rect key="frame" x="108" y="53" width="141" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="KWN-xd-JCY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="80"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpZ-EO-jWZ">
+                                <rect key="frame" x="142" y="184" width="73" height="30"/>
+                                <state key="normal" title="Edit avator"/>
                                 <connections>
                                     <action selector="AddImg:" destination="eX6-F2-bzV" eventType="touchUpInside" id="j00-YI-lw1"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXK-UP-LP7">
-                                <rect key="frame" x="173" y="53" width="141" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OW5-Q7-J0z" firstAttribute="top" secondItem="1TZ-GG-JYt" secondAttribute="top" constant="323" id="0g1-Az-sk5"/>
+                            <constraint firstItem="GUz-GC-ieS" firstAttribute="bottom" secondItem="4nJ-oc-zOA" secondAttribute="bottom" constant="28" id="6y6-vy-rdb"/>
+                            <constraint firstItem="GUz-GC-ieS" firstAttribute="trailing" secondItem="hXK-UP-LP7" secondAttribute="trailing" constant="126" id="Jh4-6O-EQc"/>
+                            <constraint firstItem="OpZ-EO-jWZ" firstAttribute="top" secondItem="hXK-UP-LP7" secondAttribute="bottom" constant="8" symbolic="YES" id="Nds-EP-NJ4"/>
+                            <constraint firstItem="hXK-UP-LP7" firstAttribute="leading" secondItem="GUz-GC-ieS" secondAttribute="leading" constant="108" id="d7q-dc-Ykw"/>
+                            <constraint firstItem="4nJ-oc-zOA" firstAttribute="centerX" secondItem="1TZ-GG-JYt" secondAttribute="centerX" id="fp5-JP-czh"/>
+                            <constraint firstItem="OpZ-EO-jWZ" firstAttribute="centerX" secondItem="hXK-UP-LP7" secondAttribute="centerX" id="hmb-b0-oAM"/>
+                            <constraint firstItem="OW5-Q7-J0z" firstAttribute="leading" secondItem="1TZ-GG-JYt" secondAttribute="leading" constant="137" id="sVF-v9-fOI"/>
+                            <constraint firstItem="hXK-UP-LP7" firstAttribute="top" secondItem="GUz-GC-ieS" secondAttribute="top" constant="33" id="uP0-gB-UL2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="GUz-GC-ieS"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="8Xr-Ud-Leq"/>
@@ -981,7 +999,7 @@
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wjO-qC-Z7y"/>
-        <segue reference="nbg-eP-0CS"/>
+        <segue reference="0yb-wg-8Sj"/>
+        <segue reference="Xsa-2x-CGn"/>
     </inferredMetricsTieBreakers>
 </document>

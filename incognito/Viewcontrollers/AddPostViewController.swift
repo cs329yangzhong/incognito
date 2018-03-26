@@ -11,18 +11,16 @@ import Firebase
 import GooglePlaces
 import GoogleMaps
 
-class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
- UINavigationControllerDelegate{
+class AddPostViewController: UIViewController,UICollectionViewDataSource, UIImagePickerControllerDelegate,
+ UINavigationControllerDelegate, UICollectionViewDelegate{
     
+    let storageref = DataStore.storage.reference()
     // Declare the Imgpicker.
     var imagePicker: UIImagePickerController = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imagePicker.delegate = self
     }
-    // initialize Google map.
-    
-    
-    // Do any additional setup after loading the view.
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -30,6 +28,7 @@ class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // Adding img.
+    var ImgList = [UIImage]()
     var CurrentImg: UIImage?
     @IBAction func AddImg(_ sender: Any) {
         let alertController : UIAlertController = UIAlertController(
@@ -41,6 +40,7 @@ class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
                     self.imagePicker.sourceType = .camera
                     self.present()
+                    
                 }else{
                     self.present(self.showAlert(Title: "Error", Message: "Camera is not available on this Device or accesibility has been revoked!"), animated: true, completion: nil)
                 }
@@ -71,12 +71,30 @@ class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage ,didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("info of the pic reached :\(info) ")
-        CurrentImg = image
+        if let choosenImg = info[UIImagePickerControllerOriginalImage]as? UIImage {
+            ImgList.append(choosenImg)
+            CurrentImg = choosenImg
+            print("1")
+        }
         self.imagePicker.dismiss(animated: true, completion: nil)
-        var data = NSData()
-        data = UIImageJPEGRepresentation(CurrentImg!, 0.8)! as NSData
+        
+//        var data = UIImageJPEGRepresentation(CurrentImg!, 0.8)! as NSData
+//        let filePath = ""
+//        let metaData = StorageMetadata()
+//        metaData.contentType = "image/jpg"
+//        self.storageref.child(filePath).putData(data as Data, metadata: metaData){(metaData,error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }else{
+//                //store downloadURL
+//                let downloadURL = metaData!.downloadURL()!.absoluteString
+//                //store downloadURL at database
+//                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["avatar": downloadURL])
+//            }
+//        }
         
     }
     
@@ -91,6 +109,25 @@ class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
         alertController.popoverPresentationController?.sourceView = view
         alertController.popoverPresentationController?.sourceRect = view.frame
         return alertController
+    }
+    
+    // Show image in Collection Cell.
+    let Identity = "added_img"
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.ImgList.count
+    }
+    // make a cell for each cell index path
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // get a reference to our storyboard cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identity, for: indexPath as IndexPath) as! ImgCollectionControllerCollectionViewCell
+        
+        // Use the outlet in our custom class to get a reference to the UILabel in the cell
+        cell.displayContent(img: ImgList[indexPath.row])
+        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
+        
+        return cell
     }
     
     @IBOutlet weak var textfield: UITextView!

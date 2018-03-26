@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("info of the pic reached :\(info) ")
-        if let choosenImg = info[UIImagePickerControllerOriginalImage] as? UIImage{
+        if let choosenImg = info[UIImagePickerControllerOriginalImage]as? UIImage{
             CurrentImg.image = choosenImg
             print("Update Avatar")
         }
@@ -78,7 +78,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 //store downloadURL
                 let downloadURL = metaData!.downloadURL()!.absoluteString
                 //store downloadURL at database
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["userPhoto": downloadURL])
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["avatar": downloadURL])
             }
         }
     }
