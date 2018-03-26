@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let storageref = DataStore.storage.reference()
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
         {(cameraAction) in
             print("camera Selected...")
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
+                self.imagePicker.delegate = self
                 self.imagePicker.sourceType = .camera
                 self.present()
             }else{
@@ -34,6 +35,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
         let libraryAction : UIAlertAction = UIAlertAction(title: "Photo Library", style: .default, handler: {(libraryAction) in
             print("Photo library selected....")
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == true {
+                self.imagePicker.delegate = self
                 self.imagePicker.sourceType = .photoLibrary
                 self.present()
             }else{
@@ -56,10 +58,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    @objc internal func imagePickerController(_picker: UIImagePickerController, didFinishPickingImage image: UIImage ,editingInfo info: [String : AnyObject]?) {
+    @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("info of the pic reached :\(info) ")
-        CurrentImg.image = image
-        print("1")
+        if let choosenImg = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            CurrentImg.image = choosenImg
+            print("Update Avatar")
+        }
         self.imagePicker.dismiss(animated: true, completion: nil)
         var data = NSData()
         data = UIImageJPEGRepresentation(CurrentImg.image!, 0.8)! as NSData

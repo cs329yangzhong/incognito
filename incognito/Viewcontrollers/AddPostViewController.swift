@@ -11,8 +11,8 @@ import Firebase
 import GooglePlaces
 import GoogleMaps
 
-class AddPostViewController: UIViewController,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate{
+class AddPostViewController: UIViewController, UIImagePickerControllerDelegate,
+ UINavigationControllerDelegate{
     
     // Declare the Imgpicker.
     var imagePicker: UIImagePickerController = UIImagePickerController()

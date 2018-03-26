@@ -15,6 +15,7 @@
 		5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B0A205468960005E651 /* AddPostViewController.swift */; };
 		5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD492066DFA300AA7716 /* PlaceViewController.swift */; };
 		5D95CD4C2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */; };
+		5D95CD4E2068891B00AA7716 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D95CD4D2068891B00AA7716 /* GoogleService-Info.plist */; };
 		5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA199204B3419005E0972 /* AppDelegate.swift */; };
 		5D9BA19F204B3419005E0972 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA19D204B3419005E0972 /* Main.storyboard */; };
 		5D9BA1A1204B3419005E0972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9BA1A0204B3419005E0972 /* Assets.xcassets */; };
@@ -23,7 +24,6 @@
 		5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA1AF204B5B3D005E0972 /* User.swift */; };
 		5D9BA1B2204B5B53005E0972 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA1B1204B5B53005E0972 /* Post.swift */; };
 		5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA1B3204B5B62005E0972 /* Comment.swift */; };
-		AC916498206864EA00753941 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC916497206864E900753941 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +34,7 @@
 		5D6E3B0A205468960005E651 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		5D95CD492066DFA300AA7716 /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgCollectionControllerCollectionViewCell.swift; sourceTree = "<group>"; };
+		5D95CD4D2068891B00AA7716 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5D9BA196204B3419005E0972 /* incognito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = incognito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9BA199204B3419005E0972 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D9BA19E204B3419005E0972 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		5D9BA1B1204B5B53005E0972 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D9BA1B3204B5B62005E0972 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		7BC2F2939EB1DD0F8CC6A8A2 /* Pods-incognito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.debug.xcconfig"; sourceTree = "<group>"; };
-		AC916497206864E900753941 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/0e80375662fe1b1c8696e394be65f92b/Message/MessageTemp/fecfb4aa3184a04ec721e71d948e0754/File/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCE9DF3B21C0C596639EBB6F /* Pods-incognito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.release.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.release.xcconfig"; sourceTree = "<group>"; };
 		EA3BA58840EAE54469BDB92D /* Pods_incognito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_incognito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,7 +114,7 @@
 		5D9BA198204B3419005E0972 /* incognito */ = {
 			isa = PBXGroup;
 			children = (
-				AC916497206864E900753941 /* GoogleService-Info.plist */,
+				5D95CD4D2068891B00AA7716 /* GoogleService-Info.plist */,
 				5D9BA199204B3419005E0972 /* AppDelegate.swift */,
 				5D6E3B0C2054699B0005E651 /* Viewcontrollers */,
 				5D9BA19D204B3419005E0972 /* Main.storyboard */,
@@ -192,7 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D9BA1A4204B3419005E0972 /* LaunchScreen.storyboard in Resources */,
-				AC916498206864EA00753941 /* GoogleService-Info.plist in Resources */,
+				5D95CD4E2068891B00AA7716 /* GoogleService-Info.plist in Resources */,
 				5D9BA1A1204B3419005E0972 /* Assets.xcassets in Resources */,
 				5D9BA19F204B3419005E0972 /* Main.storyboard in Resources */,
 			);
