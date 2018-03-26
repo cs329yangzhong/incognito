@@ -8,15 +8,17 @@
 
 import Foundation
 class Post {
+    var id: String
     var uid: String
     var text: String
-    var image: String
+    var image = [String]()
     var location: String
     var time: String
     var like = [String]()
     var comments = [String]()
     
-    init(uid: String, text: String, image: String,location: String, time: String, like: [String], comments: [String]) {
+    init(id: String, uid: String, text: String, image: [String],location: String, time: String, like: [String], comments: [String]) {
+        self.id = id
         self.uid = uid
         self.text = text
         self.image = image

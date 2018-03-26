@@ -637,6 +637,9 @@
                                     <constraint firstAttribute="height" constant="22" id="N91-6h-Qax"/>
                                 </constraints>
                                 <state key="normal" title="Cancel" image="stroke"/>
+                                <connections>
+                                    <segue destination="2Cz-9W-fgS" kind="show" id="G46-JA-RMv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OB7-YG-Ino">
                                 <rect key="frame" x="5" y="367" width="57" height="23"/>
@@ -733,6 +736,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" id="g4j-wm-cz5"/>
                     <connections>
+                        <outlet property="MyCollection" destination="lPq-2M-Lke" id="TWM-zN-T2N"/>
                         <outlet property="addressLabel" destination="nrV-QM-TgN" id="eLh-hG-zfB"/>
                         <outlet property="textfield" destination="0BK-8w-B0F" id="eLU-gj-GO5"/>
                     </connections>
@@ -999,6 +1003,7 @@
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="G46-JA-RMv"/>
         <segue reference="0yb-wg-8Sj"/>
         <segue reference="Xsa-2x-CGn"/>
     </inferredMetricsTieBreakers>

@@ -116,9 +116,10 @@ class DataStore {
                     let post_like = post["post_like"]
                     let post_comment = post["post_comment"]
         
-                    let newPost = Post(uid:post_user as! String,
+                    let newPost = Post(id: post_id as! String,
+                                       uid:post_user as! String,
                                        text:post_text as! String,
-                                       image: post_image as! String,
+                                       image: post_image as! [String],
                                        location: post_location as! String,
                                        time: post_time as! String,
                                        like : post_like as! [String],
@@ -131,36 +132,62 @@ class DataStore {
         }
         
     }
-    
-    func addPost(post: Post) {
+    func addPost(post: Post, ImgList: [UIImage]) {
+        
         // define array of key/value pairs to store for this person.
+        let key = self.ref.child("posts").childByAutoId().key
+        let userID = Auth.auth().currentUser?.uid
+        
+        // Save to Firebase.
+        var PostImage = ["none"]
+        var Finish:Int = ImgList.count - 1
+        while (Finish >= 0){
+                var data = NSData()
+                data = UIImageJPEGRepresentation(ImgList[Finish], 0.8)! as NSData
+                Finish = Finish - 1
+                let filePath = "\(Auth.auth().currentUser!.uid)/\(key)/\(index)"
+                let metaData = StorageMetadata()
+                metaData.contentType = "image/jpg"
+                DataStore.storage.reference().child(filePath).putData(data as Data, metadata: metaData){(metaData,error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }else{
+                        //store downloadURL
+                        let downloadURL = metaData!.downloadURL()!.absoluteString
+                        print(downloadURL)
+                        //store downloadURL at database
+                        PostImage.append(downloadURL)
+                        print(PostImage)
+                    }
+                }
+        }
+        print(PostImage)
+        
         let postRecord:[String:Any] = [
+            "id": key,
             "post_user": post.uid,
-            "post_image": post.image,
+            "post_image": PostImage,
             "post_location": post.location,
             "post_text": post.text,
             "post_time": post.time,
             "post_like": post.like,
             "post_comment" : post.comments
-            ]
-        // Save to Firebase.
-        let key = self.ref.child("posts").childByAutoId().key
+        ]
         
         self.ref.child("posts").child(key).setValue(postRecord)
         // Update the user's post list.
-        let userID = Auth.auth().currentUser?.uid
+       
         ref.child("users").child(userID!).child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSArray
             var post_list = value as! [String]
             post_list.append(key)
             self.ref.child("users").child(userID!).updateChildValues(["posts" : post_list])
-            
             // ...
         }) { (error) in
             print(error.localizedDescription)
         }
-        
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Posts.append(post)

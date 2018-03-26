@@ -11,15 +11,18 @@ import Firebase
 import GooglePlaces
 import GoogleMaps
 
-class AddPostViewController: UIViewController,UICollectionViewDataSource, UIImagePickerControllerDelegate,
+class AddPostViewController: UIViewController, UICollectionViewDataSource, UIImagePickerControllerDelegate,
  UINavigationControllerDelegate, UICollectionViewDelegate{
     
     let storageref = DataStore.storage.reference()
     // Declare the Imgpicker.
     var imagePicker: UIImagePickerController = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagePicker.delegate = self
+        MyCollection.delegate = self
+        MyCollection.dataSource = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,8 +31,26 @@ class AddPostViewController: UIViewController,UICollectionViewDataSource, UIImag
     }
     
     // Adding img.
+    let Identity = "added_img"
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.ImgList.count
+    }
+    // make a cell for each cell index path
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // get a reference to our storyboard cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identity, for: indexPath as IndexPath) as! ImgCollectionControllerCollectionViewCell
+        
+        // Use the outlet in our custom class to get a reference to the UILabel in the cell
+        cell.displayContent(img: ImgList[indexPath.row])
+        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
+        return cell
+    }
+    
     var ImgList = [UIImage]()
     var CurrentImg: UIImage?
+    
+    @IBOutlet weak var MyCollection: UICollectionView!
     @IBAction func AddImg(_ sender: Any) {
         let alertController : UIAlertController = UIAlertController(
             title: "Select Camera or camera Library",
@@ -76,31 +97,14 @@ class AddPostViewController: UIViewController,UICollectionViewDataSource, UIImag
         if let choosenImg = info[UIImagePickerControllerOriginalImage]as? UIImage {
             ImgList.append(choosenImg)
             CurrentImg = choosenImg
-            print("1")
+            MyCollection.reloadData()
+            // Reload the data from the ImgList.
         }
         self.imagePicker.dismiss(animated: true, completion: nil)
-        
-//        var data = UIImageJPEGRepresentation(CurrentImg!, 0.8)! as NSData
-//        let filePath = ""
-//        let metaData = StorageMetadata()
-//        metaData.contentType = "image/jpg"
-//        self.storageref.child(filePath).putData(data as Data, metadata: metaData){(metaData,error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }else{
-//                //store downloadURL
-//                let downloadURL = metaData!.downloadURL()!.absoluteString
-//                //store downloadURL at database
-//                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["avatar": downloadURL])
-//            }
-//        }
-        
     }
     
     //Show Alert
     func showAlert(Title : String!, Message : String!)  -> UIAlertController {
-        
         let alertController : UIAlertController = UIAlertController(title: Title, message: Message, preferredStyle: .alert)
         let okAction : UIAlertAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
             print("User pressed ok function")
@@ -110,48 +114,30 @@ class AddPostViewController: UIViewController,UICollectionViewDataSource, UIImag
         alertController.popoverPresentationController?.sourceRect = view.frame
         return alertController
     }
-    
-    // Show image in Collection Cell.
-    let Identity = "added_img"
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.ImgList.count
-    }
-    // make a cell for each cell index path
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        // get a reference to our storyboard cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identity, for: indexPath as IndexPath) as! ImgCollectionControllerCollectionViewCell
-        
-        // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        cell.displayContent(img: ImgList[indexPath.row])
-        cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
-        
-        return cell
-    }
-    
+
+    // Choose location.
     @IBOutlet weak var textfield: UITextView!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
-    
     @IBAction func decide_location(_ sender: UIButton) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         present(autocompleteController, animated: true, completion: nil)
     }
     
+    // Add the post and update all data.
     @IBAction func DidAddPost(_ sender: Any) {
         let id = Auth.auth().currentUser?.uid
-        let post = Post(uid: id!,
+        let post = Post(id: "random",
+                        uid: id!,
                         text: textfield.text!,
-                        image: "none",
-                        location: nameLabel.text!,
-                        time: "none",
+                        image: ["none"],
+                        location: addressLabel.text!,
+                        time: "None",
                         like: ["none"],
                         comments: ["none"])
-        DataStore.shared.addPost(post: post)
+        DataStore.shared.addPost(post: post, ImgList: ImgList)
         print("Successfully saved post")
+        
     }
     
     /*
