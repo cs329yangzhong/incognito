@@ -80,7 +80,7 @@ class DataStore {
             "avatar" : user.avatar,
             ] as [String : Any]
         
-        // Save to Firebase.
+    // Save to Firebase.
     self.ref.child("users").child(id).setValue(userRecord)
         
         // Also save to our internal array, to stay in sync with what's in Firebase.
@@ -116,7 +116,7 @@ class DataStore {
                     let post_like = post["post_like"]
                     let post_comment = post["post_comment"]
         
-                    let newPost = Post(id: post_id as! String,
+                    let newPost = Post(id: post_id,
                                        uid:post_user as! String,
                                        text:post_text as! String,
                                        image: post_image as! [String],
@@ -170,7 +170,6 @@ class DataStore {
         Posts.append(post)
         
         // Save image url to post_image in Firebase.
-        
         var Finish:Int = ImgList.count - 1
         while (Finish >= 0){
             var data = NSData()
@@ -197,18 +196,11 @@ class DataStore {
                         print(error.localizedDescription)
                     }
             
+                }
+            }
         }
-        }
-        }
-        }
-
-        
-    
-    
-
-    
-    
-    
+    }
+   
     // **********************************************************************
     // *******************                               ********************
     // ******************* load comment and add comment  ********************

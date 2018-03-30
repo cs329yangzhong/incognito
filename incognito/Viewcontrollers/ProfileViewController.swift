@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Log out function.
     @IBAction func Logout(_ sender: Any) {
         if Auth.auth().currentUser != nil {
-            print(Auth.auth().currentUser)
+            print(Auth.auth().currentUser!)
            // there is user signed in.
             do {
                 try? Auth.auth().signOut()
