@@ -9,12 +9,43 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
     let storageref = DataStore.storage.reference()
     
+    // Fetch User avator from firebase.
+    func ShowProfile() {
+    let usersRef = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
+    
+    // observe the current user once and store all the basic information.
+    usersRef.observeSingleEvent(of: .value, with: { snapshot in
+    if !snapshot.exists() { return}
+    print(snapshot)
+    let userInfo = snapshot.value as! NSDictionary
+    print(userInfo)
+    let profileUrl = userInfo["avatar"] as! String
+    print(profileUrl)
+        
+    // If the user has not setup avatar, use the default avatar.
+    if (profileUrl == "None"){
+        self.CurrentImg.image = UIImage(named: "icon2")
+    }else{
+        let storageRef = Storage.storage().reference(forURL: profileUrl)
+        storageRef.downloadURL(completion: { (url, error) in
+        if let error = error{
+            print(error.localizedDescription)
+            return
+        }else{
+            let data = NSData(contentsOf: url!)
+            let image = UIImage(data: data! as Data)
+            self.CurrentImg.image = image
+            }
+        })
+    }
+    })
+    }
+
+    // ################# Modify User avatar.#####################
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    
-    
     @IBOutlet weak var CurrentImg: UIImageView!
     @IBAction func AddImg(_ sender: Any) {
         let alertController : UIAlertController = UIAlertController(
@@ -78,7 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 //store downloadURL
                 let downloadURL = metaData!.downloadURL()!.absoluteString
                 //store downloadURL at database
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["avatar": downloadURL])
+        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["avatar": downloadURL])
             }
         }
     }
@@ -98,8 +129,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
+    @IBOutlet weak var Year: UILabel!
+    // Picker for class of year.
+    let grade = ["N/A","Freshman", "Sophomore","Junior","Senior", "Graduate", "PHD"]
+    var finishChoose:Bool = false
+    @IBOutlet weak var ClassPicker: UIPickerView!
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return grade.count
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        Year.text = grade[row]
+        
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        finishChoose = true
+        return grade[row]
+    }
+    @IBAction func ChooseGrade(_ sender: Any) {
+        ClassPicker.isHidden = false
+        if (finishChoose == true){
+            ClassPicker.isHidden = true
+        }
+    }
     
-    // Log out function.
+
+    // ######### Sign out function.#############
     @IBAction func Logout(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             print(Auth.auth().currentUser!)
@@ -122,7 +179,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        CurrentImg.isUserInteractionEnabled = true
+        ShowProfile()
         // Do any additional setup after loading the view.
+        ClassPicker.delegate = self
+        ClassPicker.dataSource = self
+        ClassPicker.isHidden = true
+        Year.isUserInteractionEnabled = true
+        view.addSubview(ClassPicker)
     }
 
     override func didReceiveMemoryWarning() {

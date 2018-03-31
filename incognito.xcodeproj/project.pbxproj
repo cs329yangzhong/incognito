@@ -13,6 +13,9 @@
 		5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B06205461200005E651 /* SignInViewController.swift */; };
 		5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B082054613E0005E651 /* SignUpViewController.swift */; };
 		5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E3B0A205468960005E651 /* AddPostViewController.swift */; };
+		5D75604F206EC7BB003C6B72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D75604E206EC7BB003C6B72 /* SettingViewController.swift */; };
+		5D756054206ECE06003C6B72 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D756053206ECE06003C6B72 /* DiscoverController.swift */; };
+		5D756056206ECFF8003C6B72 /* PostDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */; };
 		5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD492066DFA300AA7716 /* PlaceViewController.swift */; };
 		5D95CD4C2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */; };
 		5D95CD5020688C9D00AA7716 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D95CD4F20688C9D00AA7716 /* GoogleService-Info.plist */; };
@@ -32,6 +35,9 @@
 		5D6E3B06205461200005E651 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5D6E3B082054613E0005E651 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5D6E3B0A205468960005E651 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		5D75604E206EC7BB003C6B72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		5D756053206ECE06003C6B72 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
+		5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewCell.swift; sourceTree = "<group>"; };
 		5D95CD492066DFA300AA7716 /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgCollectionControllerCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D95CD4F20688C9D00AA7716 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -85,12 +91,35 @@
 				5D6E3B082054613E0005E651 /* SignUpViewController.swift */,
 				5D6E3B06205461200005E651 /* SignInViewController.swift */,
 				5D6E3B0A205468960005E651 /* AddPostViewController.swift */,
-				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
 				5D95CD492066DFA300AA7716 /* PlaceViewController.swift */,
+				5D756053206ECE06003C6B72 /* DiscoverController.swift */,
 				5D58A2E8205CD10B00108265 /* SplashViewController.swift */,
 				5D58A2EA205F5EE800108265 /* ProfileViewController.swift */,
+				5D75604E206EC7BB003C6B72 /* SettingViewController.swift */,
 			);
 			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		5D756050206EC7C4003C6B72 /* storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5D9BA1A2204B3419005E0972 /* LaunchScreen.storyboard */,
+				5D9BA19D204B3419005E0972 /* Main.storyboard */,
+			);
+			path = storyboard;
+			sourceTree = "<group>";
+		};
+		5D756052206EC7F2003C6B72 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
+				5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */,
+				5D9BA1AF204B5B3D005E0972 /* User.swift */,
+				5D9BA1B3204B5B62005E0972 /* Comment.swift */,
+				5D9BA1B1204B5B53005E0972 /* Post.swift */,
+				5D9BA1AD204B5AFC005E0972 /* Datastore.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		5D9BA18D204B3419005E0972 = {
@@ -117,13 +146,9 @@
 				5D9BA199204B3419005E0972 /* AppDelegate.swift */,
 				5D95CD4F20688C9D00AA7716 /* GoogleService-Info.plist */,
 				5D6E3B0C2054699B0005E651 /* Viewcontrollers */,
-				5D9BA19D204B3419005E0972 /* Main.storyboard */,
-				5D9BA1AD204B5AFC005E0972 /* Datastore.swift */,
-				5D9BA1AF204B5B3D005E0972 /* User.swift */,
-				5D9BA1B3204B5B62005E0972 /* Comment.swift */,
-				5D9BA1B1204B5B53005E0972 /* Post.swift */,
+				5D756050206EC7C4003C6B72 /* storyboard */,
+				5D756052206EC7F2003C6B72 /* Data */,
 				5D9BA1A0204B3419005E0972 /* Assets.xcassets */,
-				5D9BA1A2204B3419005E0972 /* LaunchScreen.storyboard */,
 				5D9BA1A5204B3419005E0972 /* Info.plist */,
 			);
 			path = incognito;
@@ -275,10 +300,13 @@
 				5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */,
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,
 				5D6E3B092054613E0005E651 /* SignUpViewController.swift in Sources */,
+				5D75604F206EC7BB003C6B72 /* SettingViewController.swift in Sources */,
 				5D58A2EB205F5EE800108265 /* ProfileViewController.swift in Sources */,
+				5D756056206ECFF8003C6B72 /* PostDetailViewCell.swift in Sources */,
 				5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */,
 				5D58A2E9205CD10B00108265 /* SplashViewController.swift in Sources */,
 				5D95CD4C2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift in Sources */,
+				5D756054206ECE06003C6B72 /* DiscoverController.swift in Sources */,
 				5D6E3B07205461200005E651 /* SignInViewController.swift in Sources */,
 				5D6E3B0B205468960005E651 /* AddPostViewController.swift in Sources */,
 				5D9BA19A204B3419005E0972 /* AppDelegate.swift in Sources */,
