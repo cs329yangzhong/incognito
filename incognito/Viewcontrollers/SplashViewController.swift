@@ -12,11 +12,10 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Intialize the Datastore.
         DataStore.shared.loadUser()
         DataStore.shared.loadPost()
         DataStore.shared.loadComment()
+        // Intialize the Datastore.
     }
 
     override func didReceiveMemoryWarning() {

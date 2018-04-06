@@ -30,7 +30,10 @@ class DataStore {
     func getUser(index: Int) -> User {
         return Users[index]
     }
-    
+    func countPost() -> Int {
+        return Posts.count
+    }
+
     func loadUser() {
         // Start with an empty array of User objects.
         Users = [User]()
@@ -133,6 +136,8 @@ class DataStore {
     }
     var PostImage = ["None"]
     var current_key = "None"
+    
+    // Add Post.
     func addPost(post: Post, ImgList: [UIImage]) {
         
         // define array of key/value pairs to store for this person.
@@ -151,7 +156,6 @@ class DataStore {
             "post_like": post.like,
             "post_comment" : post.comments
         ]
-        
         self.ref.child("posts").child(key).setValue(postRecord)
         
         // Update the user's post list.
@@ -161,7 +165,7 @@ class DataStore {
             var post_list = value as! [String]
             post_list.append(key)
             self.ref.child("users").child(userID!).updateChildValues(["posts" : post_list])
-            //
+            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -258,4 +262,55 @@ class DataStore {
         
     }
     
+    //  Show user's avatar
+    func ShowAvatarName(uid: String, Avatar: UIImageView, Name: UILabel){
+        let usersRef = Database.database().reference().child("users").child(uid)
+        // observe the current user once and store all the basic information.
+        usersRef.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() { return}
+            let userInfo = snapshot.value as! NSDictionary
+            let username = userInfo["username"] as! String
+            Name.text = username
+            let profileUrl = userInfo["avatar"] as! String
+
+            // If the user hasn't set up avatar, use the default one.
+            if (profileUrl == "None"){
+                Avatar.image = UIImage(named: "icon2")
+                return
+            }
+            
+            // Download the avatar from firebase and update the poster's avatar.
+            let storageRef = Storage.storage().reference(forURL: profileUrl)
+            storageRef.downloadURL(completion: { (url, error) in
+                if let error = error{
+                    print(error.localizedDescription)
+                    return
+                }else{
+                    let data = NSData(contentsOf: url!)
+                    let image = UIImage(data: data! as Data)
+                    Avatar.image = image
+                }
+            })
+        })
+    }
+    
+    // Load images from the urls in the post.
+    func loadphoto(Urllist: [String]) -> [UIImage]? {
+        var Img = [UIImage]()
+        if (Urllist.count == 1){return nil}
+//        for i in 1...Urllist.count - 1 {
+            let storageRef = Storage.storage().reference(forURL:Urllist[1])
+            storageRef.downloadURL(completion: { (url, error) in
+                if let error = error{
+                    print(error.localizedDescription)
+                    return
+                }else{
+                    let data = NSData(contentsOf: url!)
+                    let image = UIImage(data: data! as Data)
+                    Img.append(image!)
+                }
+            })
+//        }
+        return Img
+}
 }

@@ -13,7 +13,7 @@ class SignInViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-
+    
     @IBAction func LoginAction(_ sender: Any) {
 
         // Checking empty fields.

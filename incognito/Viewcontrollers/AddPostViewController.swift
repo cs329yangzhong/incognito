@@ -20,6 +20,7 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.imagePicker.delegate = self
         MyCollection.delegate = self
         MyCollection.dataSource = self

@@ -182,11 +182,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
         CurrentImg.isUserInteractionEnabled = true
         ShowProfile()
         // Do any additional setup after loading the view.
-        ClassPicker.delegate = self
-        ClassPicker.dataSource = self
-        ClassPicker.isHidden = true
-        Year.isUserInteractionEnabled = true
-        view.addSubview(ClassPicker)
+//        ClassPicker.delegate = self
+//        ClassPicker.dataSource = self
+//        ClassPicker.isHidden = true
+//        Year.isUserInteractionEnabled = true
+//        view.addSubview(ClassPicker)
     }
 
     override func didReceiveMemoryWarning() {

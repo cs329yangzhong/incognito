@@ -10,44 +10,68 @@ import UIKit
 import Firebase
 
 class DiscoverController: UITableViewController {
+    var refresher: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        super.title = "Discover"
+        
+        // add refresher.
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self, action: #selector(DiscoverController.populate),
+                                  for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+        
     }
-
+    
+    @objc func populate(){
+        tableView.reloadData()
+        refresher.endRefreshing()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-    
-   
+    // MARK: - Table view data source.
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return DataStore.shared.countPost()
     }
 
-    /*
+    var total_post = DataStore.shared.countPost()
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostDetailViewCell
+        let post = DataStore.shared.getPost(index: total_post-1-indexPath.item)
+        
+        cell.location.text = post.location
+        cell.test1.text = post.text
+        var PostIMGS = [UIImage]()
+        
+        // observe the current user once and store all the basic information.
+        // load the poster's avatar.
+        DataStore.shared.ShowAvatarName(uid: post.uid, Avatar: cell.Avatar,Name: cell.Username)
+        var PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
+//        if (PostIMGS == []) {
+//
+//        }
+//        for img in PostIMGS {
+//            let imageView = UIImageView(image: img)
+//            cell.ImageView.addSubview(imageView)
+//        }
+//        // Construct the cell scroll.
+//
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -84,14 +108,31 @@ class DiscoverController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "showpost"){
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+        
+        let seg = segue.destination as! PostDetailViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
+            
+            var post = DataStore.shared.getPost(index: total_post-1-indexPath.item)
+            seg.CurrrentPost = post
+            
+            var PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
+            if (PostImgs != nil) {
+                seg.Imgs = PostImgs!
+            }
+        }
+        }
     }
-    */
+
 
 }
