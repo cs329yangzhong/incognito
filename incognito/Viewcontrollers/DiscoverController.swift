@@ -13,6 +13,7 @@ class DiscoverController: UITableViewController {
     var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         super.title = "Discover"
         
@@ -24,7 +25,7 @@ class DiscoverController: UITableViewController {
         tableView.addSubview(refresher)
         
     }
-    
+    var total_post = DataStore.shared.countPost()
     @objc func populate(){
         tableView.reloadData()
         refresher.endRefreshing()
@@ -46,14 +47,15 @@ class DiscoverController: UITableViewController {
         return DataStore.shared.countPost()
     }
 
-    var total_post = DataStore.shared.countPost()
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 365.0;//Choose your custom row height
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostDetailViewCell
-        let post = DataStore.shared.getPost(index: total_post-1-indexPath.item)
+        let post = DataStore.shared.getPost(index: indexPath.item)
         
         cell.location.text = post.location
         cell.test1.text = post.text
