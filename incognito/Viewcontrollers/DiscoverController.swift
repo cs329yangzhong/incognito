@@ -58,7 +58,7 @@ class DiscoverController: UITableViewController {
         let post = DataStore.shared.getPost(index: indexPath.item)
         
         cell.location.text = post.location
-        cell.test1.text = post.text
+        cell.textcontent.text = post.text
         var PostIMGS = [UIImage]()
         
         // observe the current user once and store all the basic information.
@@ -121,21 +121,21 @@ class DiscoverController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if (segue.identifier == "showpost"){
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem
         
-        let seg = segue.destination as! PostDetailViewController
-        if let indexPath = tableView.indexPathForSelectedRow {
+            let seg = segue.destination as! PostDetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
             
-            var post = DataStore.shared.getPost(index: total_post-1-indexPath.item)
-            seg.CurrrentPost = post
+                let post = DataStore.shared.getPost(index: indexPath.item)
+                seg.CurrrentPost = post
             
-            var PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
-            if (PostImgs != nil) {
-                seg.Imgs = PostImgs!
+                let PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
+                if (PostImgs != nil) {
+                    seg.Imgs = PostImgs!
+                }
             }
-        }
         }
     }
 

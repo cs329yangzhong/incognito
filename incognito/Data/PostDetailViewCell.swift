@@ -15,12 +15,11 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         // Initialization code
     }
 
-    @IBOutlet weak var ImageView: UIScrollView!
+   
     @IBOutlet weak var Avatar: UIImageView!
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var test1: UITextView!
-    @IBOutlet weak var PageControl: UIPageControl!
+    @IBOutlet weak var textcontent: UILabel!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -12,7 +12,8 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
     // Initialize a post obeject.
     var CurrrentPost: Post?
-    @IBOutlet weak var TextContent: UITextView!
+    
+    @IBOutlet weak var textContent: UILabel!
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -22,11 +23,11 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     // View didload function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         scrollview.delegate = self
-        
-        TextContent.text = CurrrentPost?.text
-        
+        textContent.text = CurrrentPost?.text
         scrollview.isHidden = false
+        
         for Image in Imgs {
             let imageView = UIImageView(image: Image)
             scrollview.addSubview(imageView)
