@@ -170,11 +170,9 @@ class DataStore {
             print(error.localizedDescription)
         }
         
-        // Also save to our internal array, to stay in sync with what's in Firebase.
-        Posts.append(post)
-        
         // Save image url to post_image in Firebase.
         var Finish:Int = ImgList.count - 1
+        
         while (Finish >= 0){
             var data = NSData()
             data = UIImageJPEGRepresentation(ImgList[Finish], 0.8)! as NSData
@@ -203,6 +201,9 @@ class DataStore {
                 }
             }
         }
+        
+        // Also save to our internal array, to stay in sync with what's in Firebase.
+        Posts.append(post)
     }
    
     // **********************************************************************
