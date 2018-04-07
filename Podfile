@@ -8,6 +8,7 @@ target 'incognito' do
   pod ‘Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Kingfisher'
   # Pods for incognito
   # add google place API
   pod 'GooglePlaces'

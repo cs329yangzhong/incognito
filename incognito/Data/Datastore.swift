@@ -193,6 +193,7 @@ class DataStore {
                         let IMages = Post?["post_image"] as? [String]
                         var Postimage = IMages as! [String]
                         Postimage.append(downloadURL)
+                        post.image.append(downloadURL)
                     self.ref.child("posts").child(self.current_key).updateChildValues(["post_image" : Postimage])
                     }){ (error) in
                         print(error.localizedDescription)

@@ -20,6 +20,7 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var textcontent: UILabel!
+    @IBOutlet weak var Img: UIImageView!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

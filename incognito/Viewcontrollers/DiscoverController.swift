@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class DiscoverController: UITableViewController {
     var refresher: UIRefreshControl!
@@ -59,21 +60,14 @@ class DiscoverController: UITableViewController {
         
         cell.location.text = post.location
         cell.textcontent.text = post.text
-        var PostIMGS = [UIImage]()
         
         // observe the current user once and store all the basic information.
         // load the poster's avatar.
-        DataStore.shared.ShowAvatarName(uid: post.uid, Avatar: cell.Avatar,Name: cell.Username)
-        var PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
-//        if (PostIMGS == []) {
-//
-//        }
-//        for img in PostIMGS {
-//            let imageView = UIImageView(image: img)
-//            cell.ImageView.addSubview(imageView)
-//        }
-//        // Construct the cell scroll.
-//
+        DataStore.shared.ShowAvatarName(uid: post.uid, Avatar: cell.Avatar, Name: cell.Username)
+        print(post.image)
+        // Download imgs and store them in cache.
+    
+        
         return cell
     }
     
