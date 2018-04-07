@@ -31,7 +31,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
                         { (user, error) in
-                        print(Auth.auth().currentUser)
+                        print(Auth.auth().currentUser!)
                         let User1 = User(username: self.UsernameTextField.text!,
                                          password: self.PasswordTextField.text!,
                                          email: self.EmailTextField.text!,

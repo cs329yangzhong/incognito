@@ -20,6 +20,7 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.imagePicker.delegate = self
         MyCollection.delegate = self
         MyCollection.dataSource = self
@@ -80,6 +81,7 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
         let cancelAction : UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel , handler: {(cancelActn) in
             print("Cancel action was pressed")
         })
+        
         alertController.addAction(cameraAction)
         alertController.addAction(libraryAction)
         alertController.addAction(cancelAction)
@@ -162,6 +164,7 @@ extension AddPostViewController: GMSAutocompleteViewControllerDelegate{
         dismiss(animated: true, completion: nil)
         addressLabel.text = place.name
     }
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.
         print("Error: ", error.localizedDescription)

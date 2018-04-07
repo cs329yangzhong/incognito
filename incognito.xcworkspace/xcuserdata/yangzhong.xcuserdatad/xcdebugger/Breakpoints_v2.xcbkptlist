@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/SignInViewController.swift"
-            timestampString = "543726516.120208"
+            timestampString = "544726348.539847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "543785476.296315"
+            timestampString = "544737943.563109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "543785476.2964081"
+            timestampString = "544737943.563159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "AddImg(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -73,13 +73,91 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "incognito/Datastore.swift"
-            timestampString = "543786468.916279"
+            filePath = "incognito/Data/PostDetailViewCell.swift"
+            timestampString = "544726348.540079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "addPost(post:ImgList:)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "PostDetailViewCell"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "incognito.PostDetailViewCell.test1.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UITextView&gt;"
+                  moduleName = "incognito"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangzhong/Documents/incognito/incognito/Data/PostDetailViewCell.swift"
+                  timestampString = "544659288.507679"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "79">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "incognito.PostDetailViewCell.test1.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UITextView&gt;"
+                  moduleName = "incognito"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangzhong/Documents/incognito/incognito/Data/PostDetailViewCell.swift"
+                  timestampString = "544659288.5204639"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "90">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "incognito.PostDetailViewCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; incognito.PostDetailViewCell"
+                  moduleName = "incognito"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangzhong/Documents/incognito/incognito/Data/PostDetailViewCell.swift"
+                  timestampString = "544659288.522619"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "515">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "incognito.PostDetailViewCell.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;incognito.PostDetailViewCell&gt;"
+                  moduleName = "incognito"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangzhong/Documents/incognito/incognito/Data/PostDetailViewCell.swift"
+                  timestampString = "544659288.5251189"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "422">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "incognito/Data/PostDetailViewCell.swift"
+            timestampString = "544726348.540144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "setSelected(_:animated:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,25 +1,24 @@
 //
-//  SplashViewController.swift
+//  SettingViewController.swift
 //  incognito
 //
-//  Created by yang zhong on 3/12/18.
+//  Created by yang zhong on 3/30/18.
 //  Copyright © 2018 yang zhong. All rights reserved.
 //
 
 import UIKit
 
-class SplashViewController: UIViewController {
+class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataStore.shared.loadUser()
-        DataStore.shared.loadPost()
-        DataStore.shared.loadComment()
-        // Intialize the Datastore.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
 

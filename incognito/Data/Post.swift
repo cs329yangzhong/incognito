@@ -17,7 +17,7 @@ class Post {
     var like = [String]()
     var comments = [String]()
     
-    init(id: String, uid: String, text: String, image: [String],location: String, time: String, like: [String], comments: [String]) {
+    init(id: String,  uid: String, text: String, image: [String],location: String,  time: String,  like: [String], comments: [String]) {
         self.id = id
         self.uid = uid
         self.text = text
