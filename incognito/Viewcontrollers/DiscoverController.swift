@@ -77,6 +77,11 @@ class DiscoverController: UITableViewController {
         return cell
     }
     
+    @IBAction func addCommentbtn(_ sender: Any) {
+        
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
