@@ -47,7 +47,10 @@ class DiscoverController: UITableViewController {
     }
 
     var total_post = DataStore.shared.countPost()
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 365.0;//Choose your custom row height
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostDetailViewCell
         let post = DataStore.shared.getPost(index: total_post-1-indexPath.item)
@@ -71,7 +74,7 @@ class DiscoverController: UITableViewController {
 //
         return cell
     }
-
+    
 
     /*
     // Override to support conditional editing of the table view.

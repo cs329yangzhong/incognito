@@ -914,7 +914,7 @@
             </objects>
             <point key="canvasLocation" x="5252" y="-682.3088455772114"/>
         </scene>
-        <!--Profile-->
+        <!--Settings-->
         <scene sceneID="2hg-rW-ui6">
             <objects>
                 <viewController id="eX6-F2-bzV" customClass="ProfileViewController" customModule="incognito" customModuleProvider="target" sceneMemberID="viewController">
@@ -1055,7 +1055,9 @@
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="GUz-GC-ieS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="8Xr-Ud-Leq"/>
+                    <tabBarItem key="tabBarItem" title="Settings" landscapeImage="settings" id="8Xr-Ud-Leq">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1076,7 +1078,7 @@
             </objects>
             <point key="canvasLocation" x="3229.5999999999999" y="222.63868065967017"/>
         </scene>
-        <!--Setting-->
+        <!--Profile-->
         <scene sceneID="e3x-1A-c1j">
             <objects>
                 <viewController id="GI7-pQ-eVV" sceneMemberID="viewController">
@@ -1086,7 +1088,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Nhq-6r-dPJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" id="hKM-9e-WNx"/>
+                    <tabBarItem key="tabBarItem" title="Profile" id="hKM-9e-WNx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efG-1V-ILw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1131,12 +1133,13 @@
         <image name="comment_icon" width="14" height="14"/>
         <image name="icon2" width="600" height="600"/>
         <image name="like_icon" width="15" height="15"/>
+        <image name="settings" width="1600" height="1600"/>
         <image name="stroke" width="10" height="20"/>
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G46-JA-RMv"/>
-        <segue reference="0yb-wg-8Sj"/>
-        <segue reference="Xsa-2x-CGn"/>
+        <segue reference="3mC-eT-NRS"/>
+        <segue reference="wjO-qC-Z7y"/>
+        <segue reference="nbg-eP-0CS"/>
     </inferredMetricsTieBreakers>
 </document>
