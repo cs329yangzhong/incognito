@@ -129,10 +129,6 @@ class DiscoverController: UITableViewController {
             
                 let post = DataStore.shared.getPost(index: indexPath.item)
                 seg.CurrrentPost = post
-            
-                let PostImgs = DataStore.shared.loadphoto(Urllist: post.image)
-                if (PostImgs != nil) {
-                    seg.Imgs = PostImgs!
                 }
             }
         }
