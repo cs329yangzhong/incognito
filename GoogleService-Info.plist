@@ -40,5 +40,9 @@
 	<string>use photos</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Use camera</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Always use location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Use location while needed</string>
 </dict>
 </plist>

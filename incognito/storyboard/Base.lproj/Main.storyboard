@@ -625,7 +625,7 @@
                                 </constraints>
                                 <state key="normal" image="add_location"/>
                                 <connections>
-                                    <action selector="decide_location:" destination="uYz-u2-Qss" eventType="touchUpInside" id="5kb-5b-Vpq"/>
+                                    <action selector="decide_location:" destination="uYz-u2-Qss" eventType="touchUpInside" id="mwx-zM-BaP"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lPq-2M-Lke">
@@ -1217,7 +1217,7 @@
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3mC-eT-NRS"/>
+        <segue reference="G46-JA-RMv"/>
         <segue reference="wjO-qC-Z7y"/>
         <segue reference="nbg-eP-0CS"/>
     </inferredMetricsTieBreakers>

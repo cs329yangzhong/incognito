@@ -10,13 +10,17 @@ import UIKit
 import Firebase
 import GooglePlaces
 import GoogleMaps
+import MapKit
 
 class AddPostViewController: UIViewController, UICollectionViewDataSource, UIImagePickerControllerDelegate,
- UINavigationControllerDelegate, UICollectionViewDelegate{
+UINavigationControllerDelegate, UICollectionViewDelegate, CLLocationManagerDelegate{
     
     let storageref = DataStore.storage.reference()
     // Declare the Imgpicker.
     var imagePicker: UIImagePickerController = UIImagePickerController()
+    var coreLocationManager = CLLocationManager()
+    var placesClient: GMSPlacesClient!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,10 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
         self.imagePicker.delegate = self
         MyCollection.delegate = self
         MyCollection.dataSource = self
+        coreLocationManager.delegate = self
+        
+        placesClient = GMSPlacesClient.shared()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,15 +65,15 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
             title: "Select Camera or camera Library",
             message: nil, preferredStyle: .actionSheet)
         let cameraAction : UIAlertAction = UIAlertAction(title: "Camera", style: .default,handler:
-            {(cameraAction) in
-                print("camera Selected...")
-                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
-                    self.imagePicker.sourceType = .camera
-                    self.present()
-                    
-                }else{
-                    self.present(self.showAlert(Title: "Error", Message: "Camera is not available on this Device or accesibility has been revoked!"), animated: true, completion: nil)
-                }
+        {(cameraAction) in
+            print("camera Selected...")
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
+                self.imagePicker.sourceType = .camera
+                self.present()
+                
+            }else{
+                self.present(self.showAlert(Title: "Error", Message: "Camera is not available on this Device or accesibility has been revoked!"), animated: true, completion: nil)
+            }
         })
         
         let libraryAction : UIAlertAction = UIAlertAction(title: "Photo Library", style: .default, handler: {(libraryAction) in
@@ -116,33 +124,31 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
         alertController.popoverPresentationController?.sourceRect = view.frame
         return alertController
     }
-
+    
     // Choose location.
     @IBOutlet weak var textfield: UITextView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBAction func decide_location(_ sender: UIButton) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        present(autocompleteController, animated: true, completion: nil)
+        coreLocationManager.requestAlwaysAuthorization()
+        placesClient.currentPlace(callback:{ (placeLikelihoodList, error) -> Void in
+            if let error = error{
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            self.addressLabel.text = ""
+            if let placeLikelihoodList = placeLikelihoodList{
+                let place = placeLikelihoodList.likelihoods.first?.place
+                if let place = place{
+                    self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ").joined(separator:"\n")
+                }
+            }
+        })
+
+        
     }
     
-    // Alert for whether the user want to save the post.
+    // Add the post and update all data.
     @IBAction func DidAddPost(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "Alert",
-                                      message: " Do you want to save the post? ",
-                                      preferredStyle: UIAlertControllerStyle.alert)
-        
-        let OKaction = UIAlertAction(title: "Yes", style:
-            UIAlertActionStyle.default, handler: AddPost)
-        alert.addAction(OKaction)
-        alert.addAction(UIAlertAction(title: "Cancel", style:
-            UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    func AddPost(alert: UIAlertAction!) {
         let id = Auth.auth().currentUser?.uid
         let post = Post(id: "random",
                         uid: id!,
@@ -154,6 +160,7 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
                         comments: ["none"])
         DataStore.shared.addPost(post: post, ImgList: ImgList)
         print("Successfully saved post")
+        
     }
     
     /*
@@ -188,7 +195,7 @@ extension AddPostViewController: GMSAutocompleteViewControllerDelegate{
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -197,5 +204,5 @@ extension AddPostViewController: GMSAutocompleteViewControllerDelegate{
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-
+    
 }

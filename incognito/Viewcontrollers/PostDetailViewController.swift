@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import Firebase
 
-class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource{
+class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate {
     
     // Initialize a post obeject.
     var CurrrentPost: Post?
