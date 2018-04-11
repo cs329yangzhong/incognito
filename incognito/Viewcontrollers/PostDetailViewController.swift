@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import Firebase
 
-class PostDetailViewController: UIViewController, UIScrollViewDelegate {
+class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource{
     
     // Initialize a post obeject.
     var CurrrentPost: Post?
@@ -82,8 +82,9 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
                               text: comment_content!,
                               comment_by: comment_maker!,
                               time: comment_time)
-        DataStore.shared.addComment(comment: newcomment)
         
+        DataStore.shared.addComment(comment: newcomment)
+        print("finish adding post")
         
         
     }

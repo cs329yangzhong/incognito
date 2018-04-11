@@ -11,10 +11,10 @@ import Firebase
 import Kingfisher
 
 class DiscoverController: UITableViewController {
-    var refresher: UIRefreshControl!
     
+    var refresher: UIRefreshControl!
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         super.title = "Discover"
         

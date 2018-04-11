@@ -20,6 +20,7 @@ class DataStore {
     private var Users: [User]!
     private var Posts: [Post]!
     private var Comments: [Comment]!
+    
     // Making the init method private means only this class can instantiate an object of this type.
     private init() {
         // Get a database reference.
@@ -232,7 +233,7 @@ class DataStore {
                 for c in comments {
                     let comment_id = c.key as! String
                     let comment = c.value as! [String:Any]
-                    let comment_postid = comment["postid"]
+                    let comment_postid = comment["comment_postid"]
                     let comment_time = comment["comment_time"]
                     let comment_by = comment["comment_by"]
                     let comment_text = comment["comment_text"]
@@ -284,10 +285,10 @@ class DataStore {
         }
     }
     
-    
-    //  Show user's avatar
+    //  Show user's avatar.
     func ShowAvatarName(uid: String, Avatar: UIImageView, Name: UILabel){
         let usersRef = Database.database().reference().child("users").child(uid)
+        
         // observe the current user once and store all the basic information.
         usersRef.observeSingleEvent(of: .value, with: { snapshot in
             if !snapshot.exists() { return}

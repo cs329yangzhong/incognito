@@ -90,12 +90,12 @@
 		5D6E3B0C2054699B0005E651 /* Viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				5D58A2E8205CD10B00108265 /* SplashViewController.swift */,
 				5D6E3B082054613E0005E651 /* SignUpViewController.swift */,
 				5D6E3B06205461200005E651 /* SignInViewController.swift */,
 				5D6E3B0A205468960005E651 /* AddPostViewController.swift */,
 				5D95CD492066DFA300AA7716 /* PlaceViewController.swift */,
 				5D756053206ECE06003C6B72 /* DiscoverController.swift */,
-				5D58A2E8205CD10B00108265 /* SplashViewController.swift */,
 				5D58A2EA205F5EE800108265 /* ProfileViewController.swift */,
 				5DB337CC2077D374003DA383 /* PostDetailViewController.swift */,
 				5D75604E206EC7BB003C6B72 /* SettingViewController.swift */,
