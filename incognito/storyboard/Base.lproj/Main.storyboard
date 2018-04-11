@@ -922,7 +922,6 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="PjD-5u-3Zt" secondAttribute="trailing" constant="29" id="TnU-Hc-RbB"/>
                                                 <constraint firstItem="80J-KG-Wd9" firstAttribute="top" secondItem="PjD-5u-3Zt" secondAttribute="top" id="Yoy-lZ-wOh"/>
                                                 <constraint firstItem="80J-KG-Wd9" firstAttribute="leading" secondItem="QV8-Mq-vaw" secondAttribute="leadingMargin" constant="-8" id="buR-BO-xDy"/>
-                                                <constraint firstItem="MaW-83-ZFi" firstAttribute="leading" secondItem="QV8-Mq-vaw" secondAttribute="leadingMargin" constant="51" id="i7x-UC-fbO"/>
                                                 <constraint firstItem="MaW-83-ZFi" firstAttribute="leading" secondItem="QV8-Mq-vaw" secondAttribute="leadingMargin" constant="50" id="nFK-9G-QKs"/>
                                                 <constraint firstItem="80J-KG-Wd9" firstAttribute="leading" secondItem="QV8-Mq-vaw" secondAttribute="leadingMargin" constant="-8" id="uqx-fB-huE"/>
                                             </constraints>
@@ -1106,7 +1105,7 @@
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="GUz-GC-ieS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" landscapeImage="settings" id="8Xr-Ud-Leq">
+                    <tabBarItem key="tabBarItem" title="Settings" landscapeImage="settings" selectedImage="settings-1" id="8Xr-Ud-Leq">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1185,6 +1184,7 @@
         <image name="icon2" width="600" height="600"/>
         <image name="like_icon" width="15" height="15"/>
         <image name="settings" width="1600" height="1600"/>
+        <image name="settings-1" width="64" height="64"/>
         <image name="stroke" width="10" height="20"/>
         <image name="wallpaper" width="640" height="1136"/>
     </resources>

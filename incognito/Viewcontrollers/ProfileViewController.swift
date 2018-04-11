@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController,     UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate {
     let storageref = DataStore.storage.reference()
     
     // Fetch User avator from firebase.
@@ -173,8 +173,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
             
         }
     }
-        
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,7 +192,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate,U
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
