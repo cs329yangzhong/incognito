@@ -24,8 +24,8 @@ class DiscoverController: UITableViewController {
         refresher.addTarget(self, action: #selector(DiscoverController.populate),
                                   for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
-        
     }
+    
     var total_post = DataStore.shared.countPost()
     @objc func populate(){
         tableView.reloadData()

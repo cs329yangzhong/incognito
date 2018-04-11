@@ -8,8 +8,8 @@
 
 import UIKit
 
+// Saving image in each collection cell.
 class ImgCollectionControllerCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var ImgView: UIImageView!
     func displayContent(img: UIImage){
       ImgView.image = img

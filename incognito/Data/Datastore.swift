@@ -21,7 +21,8 @@ class DataStore {
     private var Posts: [Post]!
     private var Comments: [Comment]!
     
-    // Making the init method private means only this class can instantiate an object of this type.
+    // Making the init method private means only this class
+    // can instantiate an object of this type.
     private init() {
         // Get a database reference.
         // Needed before we can read/write to/from the firebase database.
@@ -72,6 +73,7 @@ class DataStore {
         }
     }
     
+    // Add a new user.
     func addUser(id: String, user: User) {
         // define array of key/value pairs to store for this person.
         let userRecord = [
@@ -141,11 +143,13 @@ class DataStore {
     // *************************** Add Post. ***********************************
     func addPost(post: Post, ImgList: [UIImage]) {
         
-        // define array of key/value pairs to store for this person.
+        // Create a new key in firease that represent this new post's id.
         let key = self.ref.child("posts").childByAutoId().key
         
         // save the key in dataStore wide.
         self.current_key = key
+        
+        // Get current user's id.
         let userID = Auth.auth().currentUser?.uid
         let postRecord:[String:Any] = [
             "id": key,
@@ -157,6 +161,8 @@ class DataStore {
             "post_like": post.like,
             "post_comment" : post.comments
         ]
+        
+        // Upload the post object to firebase.
         self.ref.child("posts").child(key).setValue(postRecord)
         
         // Update the user's post list.
@@ -213,10 +219,17 @@ class DataStore {
     // ******************* load comment and add comment  ********************
     // *******************                               ********************
     // **********************************************************************
+    
     var cur_commentkey = "None"
-    func getComment(index:Int) ->Comment{
-        return Comments[index]
-    }
+//    func getComment(id: String) -> Comment {
+//        for i in Comments {
+//            if (i.id == id) {
+//                return i
+//            }
+//        }
+//        return
+//    }
+    
     func loadComment(){
         
         // Start with an empty array of User objects.
@@ -239,7 +252,8 @@ class DataStore {
                     let comment_text = comment["comment_text"]
                     
                     // Create a comment object.
-                    let newComment = Comment(post_id: comment_postid as! String,
+                    let newComment = Comment(id: comment_id,
+                                             post_id: comment_postid as! String,
                                              text: comment_text as! String,
                                              comment_by: comment_by! as! String,
                                              time: comment_text! as! String)
@@ -259,8 +273,10 @@ class DataStore {
         // define array of key/value pairs to store for this comment.
         let key = self.ref.child("comments").childByAutoId().key
         let postid = comment.post_id
+        
         // define array of key/value pairs to store for this comment.
         let commentRecord = [
+            "comment_id": key,
             "comment_postid": comment.post_id,
             "comment_time": comment.time,
             "comment_by": comment.comment_by,
@@ -317,6 +333,7 @@ class DataStore {
             })
         })
     }
+    
     
 //    // Load images from the urls in the post.
 //    func loadphoto(Urllist: [String]) -> [UIImage]? {

@@ -10,7 +10,16 @@ import UIKit
 import Kingfisher
 import Firebase
 
-class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate {
+class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return CurrrentPost!.comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentsCell
+        return cell
+    }
+    
     
     // Initialize a post obeject.
     var CurrrentPost: Post?
@@ -23,10 +32,11 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
     var refresher: UIRefreshControl!
 
     // View didload function.
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        CommentField.delegate = self
         
+        // Create a scrollview that could display all image.
         configurePageControl()
         scrollview.delegate = self
         scrollview.isPagingEnabled = false
@@ -44,7 +54,10 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
                 var IMGVIEW = UIImageView()
                 IMGVIEW.contentMode = .scaleAspectFit
                 let url = URL(string: (CurrrentPost?.image)![i])
+                
+                // Using KingsFisher library that can download the images and create local cache.
                 IMGVIEW.kf.setImage(with: url)
+                
                 let xPosition = self.scrollview.frame.width * CGFloat(i-1)
                 IMGVIEW.frame = CGRect(x: xPosition, y: (scrollview.frame.minY/2)-scrollview.frame.height/2, width: scrollview.frame.width, height: scrollview.frame.height)
                 scrollview.contentSize.width += scrollview.frame.width
@@ -69,7 +82,7 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    // Add comments.
+    //************************ Add comments. ********************************
     @IBOutlet weak var CommentField: UITextField!
     
     @IBAction func AddComment(_ sender: Any) {
@@ -78,18 +91,29 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
         let comment_content = CommentField.text
         let comment_time = "None"
         
-        let newcomment = Comment(post_id:  PostId!,
-                              text: comment_content!,
-                              comment_by: comment_maker!,
-                              time: comment_time)
+        let newcomment = Comment(id: "random",
+                                 post_id:  PostId!,
+                                 text: comment_content!,
+                                 comment_by: comment_maker!,
+                                 time: comment_time)
         
         DataStore.shared.addComment(comment: newcomment)
-        print("finish adding post")
-        
-        
+        print("finish adding Comment")
     }
     
+    //********* Todo: write the the get current time function. ***************
     
     
-
+    
+    // dismiss keyboard
+    // when click the return, the keyboard will hide automatically.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    // if the user touched anywhere outside of the keyboard, the keyboard will hide.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

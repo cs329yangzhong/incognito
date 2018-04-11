@@ -147,22 +147,44 @@ UINavigationControllerDelegate, UICollectionViewDelegate, CLLocationManagerDeleg
         
     }
     
-    // Add the post and update all data.
+    // Get current time.
+    
+
+    // Add an alert for whether the user wants to save post or not.
     @IBAction func DidAddPost(_ sender: Any) {
+        let alert = UIAlertController(title: "Alert",
+                                      message: "Are you sure to post? ",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+    
+        alert.addAction(UIAlertAction(title: "Yes", style:
+            UIAlertActionStyle.default, handler: addPost))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style:
+            UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func addPost(alert: UIAlertAction!){
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dateString = formatter.string(from: now)
+        
         let id = Auth.auth().currentUser?.uid
         let post = Post(id: "random",
                         uid: id!,
                         text: textfield.text!,
                         image: ["none"],
                         location: addressLabel.text!,
-                        time: "None",
+                        time: dateString,
                         like: ["none"],
                         comments: ["none"])
         DataStore.shared.addPost(post: post, ImgList: ImgList)
         print("Successfully saved post")
-        
+        self.performSegue(withIdentifier: "FinishAddingPost", sender: nil)
     }
-    
     /*
      // MARK: - Navigation
      
@@ -176,6 +198,8 @@ UINavigationControllerDelegate, UICollectionViewDelegate, CLLocationManagerDeleg
     // dismiss keyboard
     
 }
+
+    // get User's current location.
 extension AddPostViewController: GMSAutocompleteViewControllerDelegate{
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {

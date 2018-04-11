@@ -20,15 +20,16 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     @IBAction func ConfirmSignUp(_ sender: Any) {
         
         // Test password matching.
-        if (PasswordTextField.text! != CheckPasswordTextField.text!){
+        if (PasswordTextField.text! != CheckPasswordTextField.text!
+            || (PasswordTextField.text?.count)! <= 8){
             let alert = UIAlertController(title: "Alert",
-                                          message: "You must enter the same passwords",
+                                          message: "You must enter the same passwords with at least 8 digits",
                                           preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "ok", style:
                 UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        
+        else{
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
                         { (user, error) in
                         print(Auth.auth().currentUser!)
@@ -42,9 +43,10 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
                         DataStore.shared.addUser(id: (user?.uid)!,user: User1)
         if Auth.auth().currentUser == nil {
             self.performSegue(withIdentifier: "Signup_to_Signin", sender: self)
-                            }
+        }
         print("save")
         }
+    }
     }
     
     override func viewDidLoad() {

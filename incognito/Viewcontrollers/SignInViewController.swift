@@ -19,7 +19,7 @@ class SignInViewController: UIViewController,UITextFieldDelegate {
         // Checking empty fields.
         if (EmailTextField.text! == "" || PasswordTextField.text! == ""){
         let alert = UIAlertController(title: "Alert",
-                                      message: "Please enter both email and password.",
+                                      message: "Invalid Email adress or wrong password",
                                       preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "ok", style:
                         UIAlertActionStyle.default, handler: nil))

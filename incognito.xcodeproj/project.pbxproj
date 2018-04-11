@@ -28,6 +28,7 @@
 		5D9BA1B2204B5B53005E0972 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA1B1204B5B53005E0972 /* Post.swift */; };
 		5D9BA1B4204B5B62005E0972 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA1B3204B5B62005E0972 /* Comment.swift */; };
 		5DB337CD2077D374003DA383 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB337CC2077D374003DA383 /* PostDetailViewController.swift */; };
+		5DC3CCE7207EA26600701E51 /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3CCE6207EA26600701E51 /* CommentsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		5D9BA1B1204B5B53005E0972 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D9BA1B3204B5B62005E0972 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5DB337CC2077D374003DA383 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		5DC3CCE6207EA26600701E51 /* CommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		7BC2F2939EB1DD0F8CC6A8A2 /* Pods-incognito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.debug.xcconfig"; sourceTree = "<group>"; };
 		CCE9DF3B21C0C596639EBB6F /* Pods-incognito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.release.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.release.xcconfig"; sourceTree = "<group>"; };
 		EA3BA58840EAE54469BDB92D /* Pods_incognito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_incognito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,8 +117,6 @@
 		5D756052206EC7F2003C6B72 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
-				5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */,
 				5D9BA1AF204B5B3D005E0972 /* User.swift */,
 				5D9BA1B3204B5B62005E0972 /* Comment.swift */,
 				5D9BA1B1204B5B53005E0972 /* Post.swift */,
@@ -148,13 +148,24 @@
 			children = (
 				5D9BA199204B3419005E0972 /* AppDelegate.swift */,
 				5D95CD4F20688C9D00AA7716 /* GoogleService-Info.plist */,
-				5D6E3B0C2054699B0005E651 /* Viewcontrollers */,
 				5D756050206EC7C4003C6B72 /* storyboard */,
+				5D6E3B0C2054699B0005E651 /* Viewcontrollers */,
+				5DC3CCE5207E9D4B00701E51 /* Tabel cells */,
 				5D756052206EC7F2003C6B72 /* Data */,
 				5D9BA1A0204B3419005E0972 /* Assets.xcassets */,
 				5D9BA1A5204B3419005E0972 /* Info.plist */,
 			);
 			path = incognito;
+			sourceTree = "<group>";
+		};
+		5DC3CCE5207E9D4B00701E51 /* Tabel cells */ = {
+			isa = PBXGroup;
+			children = (
+				5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */,
+				5DC3CCE6207EA26600701E51 /* CommentsCell.swift */,
+				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
+			);
+			path = "Tabel cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC3CCE7207EA26600701E51 /* CommentsCell.swift in Sources */,
 				5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */,
 				5DB337CD2077D374003DA383 /* PostDetailViewController.swift in Sources */,
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,

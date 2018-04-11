@@ -12,18 +12,35 @@ import Firebase
 class ProfileViewController: UIViewController,     UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate {
     let storageref = DataStore.storage.reference()
     
+    // ViewDidload function.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imagePicker.delegate = self
+        CurrentImg.isUserInteractionEnabled = true
+        ShowProfile()
+        // Do any additional setup after loading the view.
+        //        ClassPicker.delegate = self
+        //        ClassPicker.dataSource = self
+        //        ClassPicker.isHidden = true
+        //        Year.isUserInteractionEnabled = true
+        //        view.addSubview(ClassPicker)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     // Fetch User avator from firebase.
     func ShowProfile() {
     let usersRef = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
     
     // observe the current user once and store all the basic information.
-    usersRef.observeSingleEvent(of: .value, with: { snapshot in
+    usersRef.observeSingleEvent(of: .value, with: {
+        snapshot in
     if !snapshot.exists() { return}
-    print(snapshot)
     let userInfo = snapshot.value as! NSDictionary
-    print(userInfo)
     let profileUrl = userInfo["avatar"] as! String
-    print(profileUrl)
         
     // If the user has not setup avatar, use the default avatar.
     if (profileUrl == "None"){
@@ -40,11 +57,11 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
             self.CurrentImg.image = image
             }
         })
-    }
+        }
     })
     }
 
-    // ################# Modify User avatar.#####################
+    // ############################ Modify User avatar.###################################
     var imagePicker: UIImagePickerController = UIImagePickerController()
     @IBOutlet weak var CurrentImg: UIImageView!
     @IBAction func AddImg(_ sender: Any) {
@@ -114,7 +131,6 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         }
     }
     
-    
     //Show Alert
     func showAlert(Title : String!, Message : String!)  -> UIAlertController {
         
@@ -127,8 +143,10 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         alertController.popoverPresentationController?.sourceRect = view.frame
         return alertController
     }
+    // ######################### function for Avatar change. ###############################################
     
     
+    // TODO : create labels for grade, username, gender features.
     @IBOutlet weak var Year: UILabel!
     // Picker for class of year.
     let grade = ["N/A","Freshman", "Sophomore","Junior","Senior", "Graduate", "PHD"]
@@ -155,8 +173,16 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         }
     }
     
-
-    // ######### Sign out function.#############
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // ############ Sign out function.##########################################
     @IBAction func Logout(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             print(Auth.auth().currentUser!)
@@ -174,32 +200,7 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        imagePicker.delegate = self
-        CurrentImg.isUserInteractionEnabled = true
-        ShowProfile()
-        // Do any additional setup after loading the view.
-//        ClassPicker.delegate = self
-//        ClassPicker.dataSource = self
-//        ClassPicker.isHidden = true
-//        Year.isUserInteractionEnabled = true
-//        view.addSubview(ClassPicker)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
