@@ -126,8 +126,23 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
         present(autocompleteController, animated: true, completion: nil)
     }
     
-    // Add the post and update all data.
+    // Alert for whether the user want to save the post.
     @IBAction func DidAddPost(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Alert",
+                                      message: " Do you want to save the post? ",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        let OKaction = UIAlertAction(title: "Yes", style:
+            UIAlertActionStyle.default, handler: AddPost)
+        alert.addAction(OKaction)
+        alert.addAction(UIAlertAction(title: "Cancel", style:
+            UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func AddPost(alert: UIAlertAction!) {
         let id = Auth.auth().currentUser?.uid
         let post = Post(id: "random",
                         uid: id!,
@@ -139,7 +154,6 @@ class AddPostViewController: UIViewController, UICollectionViewDataSource, UIIma
                         comments: ["none"])
         DataStore.shared.addPost(post: post, ImgList: ImgList)
         print("Successfully saved post")
-        
     }
     
     /*

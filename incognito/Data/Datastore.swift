@@ -137,7 +137,7 @@ class DataStore {
     var PostImage = ["None"]
     var current_key = "None"
     
-    // Add Post.
+    // *************************** Add Post. ***********************************
     func addPost(post: Post, ImgList: [UIImage]) {
         
         // define array of key/value pairs to store for this person.
@@ -185,6 +185,7 @@ class DataStore {
                     print(error.localizedDescription)
                     return
                 }else{
+                    
                     //store downloadURL
                     let downloadURL = metaData!.downloadURL()!.absoluteString
                     self.ref.child("posts").child(self.current_key).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -198,7 +199,6 @@ class DataStore {
                     }){ (error) in
                         print(error.localizedDescription)
                     }
-            
                 }
             }
         }
@@ -212,16 +212,19 @@ class DataStore {
     // ******************* load comment and add comment  ********************
     // *******************                               ********************
     // **********************************************************************
-    
+    var cur_commentkey = "None"
     func getComment(index:Int) ->Comment{
         return Comments[index]
     }
     func loadComment(){
+        
         // Start with an empty array of User objects.
         Comments = [Comment]()
+        
         // Fetch the data from Firebase and store it in our internal Comments array.
         // This is a one-time listener.
         ref.child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+            
             // Get the top-level dictionary.
             let value = snapshot.value as? NSDictionary
             if let comments = value{
@@ -229,40 +232,58 @@ class DataStore {
                 for c in comments {
                     let comment_id = c.key as! String
                     let comment = c.value as! [String:Any]
-                    let comment_uid = comment["comment_uid"]
                     let comment_postid = comment["postid"]
                     let comment_time = comment["comment_time"]
                     let comment_by = comment["comment_by"]
                     let comment_text = comment["comment_text"]
                     
-                    let newComment = Comment(uid: comment_uid as! String,
-                                             post_id: comment_postid as! String,
+                    // Create a comment object.
+                    let newComment = Comment(post_id: comment_postid as! String,
                                              text: comment_text as! String,
                                              comment_by: comment_by! as! [String],
                                              time: comment_text! as! String)
+                    
                     self.Comments.append(newComment)
                 }
             }
-            
-        }) {
+        })
+        {
             (error) in
             print(error.localizedDescription)
         }
     }
+    
     func addComment(comment:Comment){
+        
+        // define array of key/value pairs to store for this comment.
+        let key = self.ref.child("comments").childByAutoId().key
+        let postid = comment.post_id
         // define array of key/value pairs to store for this comment.
         let commentRecord = [
+            "comment_postid": comment.post_id,
             "comment_time": comment.time,
             "comment_by": comment.comment_by,
             "comment_text": comment.text
             ] as [String : Any]
         
-        //        save to Firebase
-        self.ref.child("comments").childByAutoId().setValue(commentRecord)
-        //        also save to our internal array, to stay in sync with what's in Firebase
+        // save to Firebase
+        self.ref.child("comments").child(key).setValue(commentRecord)
+        
+        // also save to our internal array, to stay in sync with what's in Firebase
         Comments.append(comment)
         
+        // Update the user's post's comments list.
+        ref.child("posts").child(postid).child("post_comment").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSArray
+            var comments = value as! [String]
+            comments.append(key)
+            self.ref.child("posts").child(postid).updateChildValues(["post_comment" : comments])
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
+    
     
     //  Show user's avatar
     func ShowAvatarName(uid: String, Avatar: UIImageView, Name: UILabel){
@@ -296,23 +317,24 @@ class DataStore {
         })
     }
     
-    // Load images from the urls in the post.
-    func loadphoto(Urllist: [String]) -> [UIImage]? {
-        var Img = [UIImage]()
-        if (Urllist.count == 1){return nil}
-//        for i in 1...Urllist.count - 1 {
-            let storageRef = Storage.storage().reference(forURL:Urllist[1])
-            storageRef.downloadURL(completion: { (url, error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                    return
-                }else{
-                    let data = NSData(contentsOf: url!)
-                    let image = UIImage(data: data! as Data)
-                    Img.append(image!)
-                }
-            })
-//        }
-        return Img
-}
+//    // Load images from the urls in the post.
+//    func loadphoto(Urllist: [String]) -> [UIImage]? {
+//        var Img = [UIImage]()
+//        if (Urllist.count == 1){return nil}
+//
+////        for i in 1...Urllist.count - 1 {
+//            let storageRef = Storage.storage().reference(forURL:Urllist[1])
+//            storageRef.downloadURL(completion: { (url, error) in
+//                if let error = error{
+//                    print(error.localizedDescription)
+//                    return
+//                }else{
+//                    let data = NSData(contentsOf: url!)
+//                    let image = UIImage(data: data! as Data)
+//                    Img.append(image!)
+//                }
+//            })
+////        }
+//        return Img
+//}
 }

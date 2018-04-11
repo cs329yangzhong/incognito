@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import Firebase
 
 class PostDetailViewController: UIViewController, UIScrollViewDelegate {
     
@@ -48,7 +49,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
                 IMGVIEW.frame = CGRect(x: xPosition, y: (scrollview.frame.minY/2)-scrollview.frame.height/2, width: scrollview.frame.width, height: scrollview.frame.height)
                 scrollview.contentSize.width += scrollview.frame.width
                 scrollview.addSubview(IMGVIEW)
-                
             }
         }
     }
@@ -63,11 +63,30 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate {
         print(scrollView.contentOffset.x)
         pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // Add comments.
+    @IBOutlet weak var CommentField: UITextField!
+    
+    @IBAction func AddComment(_ sender: Any) {
+        let PostId = CurrrentPost?.id
+        let comment_maker = Auth.auth().currentUser?.uid
+        let comment_content = CommentField.text
+        let comment_time = "None"
+        
+        let newcomment = Comment(post_id:  PostId!,
+                              text: comment_content!,
+                              comment_by: comment_maker!,
+                              time: comment_time)
+        DataStore.shared.addComment(comment: newcomment)
+        
+        
+        
+    }
     
     
     

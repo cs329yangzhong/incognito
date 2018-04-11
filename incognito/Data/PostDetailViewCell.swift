@@ -8,6 +8,7 @@
 
 import UIKit
 
+// This is the cell in Discover page.
 class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
 
     override func awakeFromNib() {
@@ -15,7 +16,6 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         // Initialization code
     }
 
-   
     @IBOutlet weak var Avatar: UIImageView!
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var location: UILabel!
