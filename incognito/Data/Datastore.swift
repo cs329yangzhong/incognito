@@ -240,7 +240,7 @@ class DataStore {
                     // Create a comment object.
                     let newComment = Comment(post_id: comment_postid as! String,
                                              text: comment_text as! String,
-                                             comment_by: comment_by! as! [String],
+                                             comment_by: comment_by! as! String,
                                              time: comment_text! as! String)
                     
                     self.Comments.append(newComment)
