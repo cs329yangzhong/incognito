@@ -55,9 +55,22 @@ class DiscoverController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostDetailViewCell
         let post = DataStore.shared.getPost(index: indexPath.item)
+        let currentUserId = Auth.auth().currentUser?.uid
         
+        // Initializing the like button's status.
+        if post.like.contains(currentUserId!) {
+            
+            // The user has liked the post.
+            cell.LikeButton.setImage(UIImage.init(named: "like"),
+                                      for: .normal)
+        } else {
+            cell.LikeButton.setImage(UIImage.init(named: "like_icon"),                                     for: .normal)
+        }
+        cell.postid = post.id
+        cell.postperson = currentUserId
         cell.location.text = post.location
         cell.textcontent.text = post.text
         

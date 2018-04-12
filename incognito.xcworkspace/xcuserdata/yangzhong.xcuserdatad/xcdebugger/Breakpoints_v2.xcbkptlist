@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "545179060.767126"
+            timestampString = "545201839.778178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "AddImg(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "545179060.7671649"
+            timestampString = "545201839.7782609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "AddImg(_:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "ShowProfile()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/DiscoverController.swift"
-            timestampString = "545179060.76723"
+            timestampString = "545201839.7783509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>

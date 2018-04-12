@@ -35,7 +35,15 @@ class DataStore {
     func countPost() -> Int {
         return Posts.count
     }
-
+    
+    func reloadPost(){
+        loadPost()
+    }
+    
+    func reloadComment() {
+        loadComment()
+    }
+    
     func loadUser() {
         // Start with an empty array of User objects.
         Users = [User]()
@@ -343,24 +351,36 @@ class DataStore {
         print ("Successfully update user's gender and class")
     }
     
-//    // Load images from the urls in the post.
-//    func loadphoto(Urllist: [String]) -> [UIImage]? {
-//        var Img = [UIImage]()
-//        if (Urllist.count == 1){return nil}
-//
-////        for i in 1...Urllist.count - 1 {
-//            let storageRef = Storage.storage().reference(forURL:Urllist[1])
-//            storageRef.downloadURL(completion: { (url, error) in
-//                if let error = error{
-//                    print(error.localizedDescription)
-//                    return
-//                }else{
-//                    let data = NSData(contentsOf: url!)
-//                    let image = UIImage(data: data! as Data)
-//                    Img.append(image!)
-//                }
-//            })
-////        }
-//        return Img
-//}
+    // Like function.
+    func DidpressLike( postid: String, Likeperson: String) -> Int{
+
+        // 0 means cancel liked. 1 means didlike.
+        var status = 0
+        let currentPost = self.ref.child("posts").child(postid)
+        
+        // observe the current post once and store all the basic information.
+        currentPost.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() { return}
+            let PostInform = snapshot.value as! NSDictionary
+            let Likelist =  PostInform["post_like"] as! [String]
+            var NewLikelist = Likelist
+            
+            // If the user has liked the post.
+            if Likelist.contains(Likeperson){
+                NewLikelist = NewLikelist.filter{$0 != Likeperson}
+                status = 0
+                
+            // The user has not liked the post.
+            } else {
+                NewLikelist.append(Likeperson)
+                status = 1
+            }
+            self.ref.child("posts").child(postid).updateChildValues(["post_like" : NewLikelist])
+        }){ (error) in
+            print(error.localizedDescription)
+        }
+        return status
+    }
+    
+    
 }

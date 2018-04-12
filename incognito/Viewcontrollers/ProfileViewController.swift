@@ -46,12 +46,6 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         classField.inputView = classPicker
         //Joy
         
-        // Do any additional setup after loading the view.
-        //        ClassPicker.delegate = self
-        //        ClassPicker.dataSource = self
-        //        ClassPicker.isHidden = true
-        //        Year.isUserInteractionEnabled = true
-        //        view.addSubview(ClassPicker)
     }
     
     override func didReceiveMemoryWarning() {
@@ -214,16 +208,7 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         DataStore.shared.updateGenderClass(gender: genderField.text!, classYear: classField.text!)
     }
     //Joy
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     // ############ Sign out function.##########################################
     @IBAction func Logout(_ sender: Any) {
         if Auth.auth().currentUser != nil {
