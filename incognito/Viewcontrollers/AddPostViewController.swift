@@ -129,6 +129,26 @@ UINavigationControllerDelegate, UICollectionViewDelegate, CLLocationManagerDeleg
     @IBOutlet weak var textfield: UITextView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBAction func decide_location(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Attention",
+                                      message: "Get your current location or choose one location",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        let buttonOne = UIAlertAction(title:"Get my location", style: .default, handler:
+            getRealTimeLocation
+            )
+        
+        let buttonTwo = UIAlertAction(title:"Choose one location", style: .default, handler:
+            autocompleteClicked
+        )
+        
+        
+        alert.addAction(buttonOne)
+        alert.addAction(buttonTwo)
+        self.present(alert, animated: true, completion: nil)
+       
+    }
+    
+    // Real-time location
+    func getRealTimeLocation(action: UIAlertAction){
         coreLocationManager.requestAlwaysAuthorization()
         placesClient.currentPlace(callback:{ (placeLikelihoodList, error) -> Void in
             if let error = error{
@@ -143,8 +163,13 @@ UINavigationControllerDelegate, UICollectionViewDelegate, CLLocationManagerDeleg
                 }
             }
         })
-
-        
+    }
+    
+    // Auto complete location
+    func autocompleteClicked(action: UIAlertAction){
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        present(autocompleteController, animated: true, completion: nil)
     }
     
     // Get current time.
