@@ -34,11 +34,12 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         
         // the user canceled like.
         if status == 0 {
-            LikeButton.setImage(UIImage.init(named: "like_icon"), for: .normal)
-            print("user Unlike the post")
-        } else {
-            LikeButton.setImage(UIImage.init(named: "like"), for: .normal)
-            print("User like the post")
+            LikeButton.setImage(UIImage(named: "like_icon"), for: .highlighted)
+            LikeButton.setImage(UIImage(named: "like_icon"), for: .normal)
+            
+        } else if status == 1 {
+            LikeButton.setImage(UIImage(named: "like"), for: .highlighted)
+            LikeButton.setImage(UIImage(named: "like"), for: .normal)
         }
     }
     

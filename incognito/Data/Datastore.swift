@@ -365,16 +365,19 @@ class DataStore {
             let Likelist =  PostInform["post_like"] as! [String]
             var NewLikelist = Likelist
             
-            // If the user has liked the post.
+            // If the user has liked the post, Then he chose to dislike.
             if Likelist.contains(Likeperson){
                 NewLikelist = NewLikelist.filter{$0 != Likeperson}
                 status = 0
+            print("User dislikes the post")
                 
-            // The user has not liked the post.
+            // The user has not liked the post. Click to like.
             } else {
                 NewLikelist.append(Likeperson)
                 status = 1
+                print(" User Liked the post")
             }
+            
             self.ref.child("posts").child(postid).updateChildValues(["post_like" : NewLikelist])
         }){ (error) in
             print(error.localizedDescription)
