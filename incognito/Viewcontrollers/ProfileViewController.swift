@@ -10,7 +10,22 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController,     UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate {
+    
+    let userID = Auth.auth().currentUser!.uid
+    
+    //Joy- for gender picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
     let storageref = DataStore.storage.reference()
+    
+    //Joy
+    @IBOutlet weak var genderField: UITextField!
+    @IBOutlet weak var classField: UITextField!
+    var genderPicker = UIPickerView()
+    var classPicker = UIPickerView()
+    //Joy
     
     // ViewDidload function.
     override func viewDidLoad() {
@@ -18,6 +33,19 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         imagePicker.delegate = self
         CurrentImg.isUserInteractionEnabled = true
         ShowProfile()
+        
+        //Joy
+
+        genderPicker.delegate = self
+        genderPicker.tag = 1
+        genderField.inputView = genderPicker
+        
+        
+        classPicker.delegate = self
+        classPicker.tag = 2
+        classField.inputView = classPicker
+        //Joy
+        
         // Do any additional setup after loading the view.
         //        ClassPicker.delegate = self
         //        ClassPicker.dataSource = self
@@ -147,31 +175,45 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     
     
     // TODO : create labels for grade, username, gender features.
-    @IBOutlet weak var Year: UILabel!
-    // Picker for class of year.
-    let grade = ["N/A","Freshman", "Sophomore","Junior","Senior", "Graduate", "PHD"]
-    var finishChoose:Bool = false
-    @IBOutlet weak var ClassPicker: UIPickerView!
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
+    
+    //Joy
+    let genders = ["Male", "Female", "N/A"]
+    let grades = ["N/A","Freshman", "Sophomore","Junior","Senior", "Graduate", "PHD"]
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return grade.count
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        Year.text = grade[row]
+        if (pickerView == genderPicker) {
+            return genders.count
+        } else {
+            return grades.count
+        }
         
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        finishChoose = true
-        return grade[row]
+        if (pickerView == genderPicker) {
+            return genders[row]
+        } else {
+            return grades[row]
+        }
+        
     }
-    @IBAction func ChooseGrade(_ sender: Any) {
-        ClassPicker.isHidden = false
-        if (finishChoose == true){
-            ClassPicker.isHidden = true
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if (pickerView == genderPicker) {
+            genderField.text = genders[row]
+            self.view.endEditing(true)
+        } else {
+            classField.text = grades[row]
+            self.view.endEditing(true)
         }
     }
+    
+    
+    
+    @IBAction func updateGenderClass(_ sender: Any) {
+        DataStore.shared.updateGenderClass(gender: genderField.text!, classYear: classField.text!)
+    }
+    //Joy
     
     
     

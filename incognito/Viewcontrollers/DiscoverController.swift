@@ -71,9 +71,6 @@ class DiscoverController: UITableViewController {
         return cell
     }
     
-    @IBAction func addCommentbtn(_ sender: Any) {
-        
-    }
     
     
 

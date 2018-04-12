@@ -335,6 +335,14 @@ class DataStore {
     }
     
     
+    // Update user's gender and class
+    func updateGenderClass (gender: String, classYear: String) {
+        let userID = Auth.auth().currentUser?.uid
+        self.ref.child("users").child(userID!).updateChildValues(["gender" : gender])
+        self.ref.child("users").child(userID!).updateChildValues(["class_year" : classYear])
+        print ("Successfully update user's gender and class")
+    }
+    
 //    // Load images from the urls in the post.
 //    func loadphoto(Urllist: [String]) -> [UIImage]? {
 //        var Img = [UIImage]()
