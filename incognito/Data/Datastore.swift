@@ -229,14 +229,14 @@ class DataStore {
     // **********************************************************************
     
     var cur_commentkey = "None"
-//    func getComment(id: String) -> Comment {
-//        for i in Comments {
-//            if (i.id == id) {
-//                return i
-//            }
-//        }
-//        return
-//    }
+    func getComment(id: String) -> Any {
+        for i in Comments {
+            if (i.id == id) {
+                return i
+            }
+        }
+        return 0
+    }
     
     func loadComment(){
         
@@ -386,5 +386,31 @@ class DataStore {
         return status
     }
     
-    
+    // Fetch Comment details。
+    func GetComment(Avatar: UIImageView, Postid: String, index: Int,
+                    CurrentPost: Post, Content: UILabel, time: UILabel ) {
+        
+        let commentID = CurrentPost.comments[index+1]
+        let Comment1 = getComment(id: commentID) as! Comment
+            let commentUser = Comment1.comment_by
+        
+            Content.text = Comment1.text
+            time.text = Comment1.time
+        
+        // Fetch Comment user's avatar.
+        let usersRef = self.ref.child("users").child(commentUser)
+        
+        // observe the current user once and store all the basic information.
+        usersRef.observeSingleEvent(of: .value, with: {
+            snapshot in
+            if !snapshot.exists() { return}
+            let userInfo = snapshot.value as! NSDictionary
+            
+            // Using KingFisher to download and save avatar.
+            let UserUrl = userInfo["avatar"] as! String
+            let url = URL(string: (UserUrl))
+            Avatar.kf.setImage(with: url)
+
+        })
+    }
 }

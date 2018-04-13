@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     }
     
     let storageref = DataStore.storage.reference()
+    var OldiconClick: Bool!
+    var NewiconClick: Bool!
     
     //Joy
     @IBOutlet weak var genderField: UITextField!
@@ -37,6 +39,8 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     // ViewDidload function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        OldiconClick = true
+        NewiconClick = true
         
         // make keboard dismiss
         oldPwdField.delegate = self
@@ -254,7 +258,7 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
             && (newPwdField.text)!.count >= 8 ) {
         Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["password": newPwdField.text!])
             user?.updatePassword(to: newPwdField.text!, completion: { (error) in
-                print(error?.localizedDescription)
+                print(error!)
             })
             
             
@@ -277,6 +281,26 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
             UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func ShowOldPwd(_ sender: Any) {
+        if(OldiconClick == true) {
+        oldPwdField.isSecureTextEntry = false
+        OldiconClick = false
+    } else {
+        oldPwdField.isSecureTextEntry = true
+        OldiconClick = true
+        }
+    }
+    
+    @IBAction func ShowNewPwd(_ sender: Any) {
+        if(NewiconClick == true) {
+        newPwdField.isSecureTextEntry = false
+        NewiconClick = false
+    } else {
+        newPwdField.isSecureTextEntry = true
+        NewiconClick = true
+        }
     }
     
     

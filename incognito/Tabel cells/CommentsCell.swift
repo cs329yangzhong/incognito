@@ -18,6 +18,7 @@ class CommentsCell: UITableViewCell {
     @IBOutlet weak var CommentTime: UILabel!
     @IBOutlet weak var CommentContent: UILabel!
     @IBOutlet weak var UserAvatar: UIImageView!
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -11,15 +11,20 @@ import Kingfisher
 import Firebase
 
 class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CurrrentPost!.comments.count
+        return CurrrentPost!.comments.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentsCell
+        print(CurrrentPost!.comments)
+        
+        DataStore.shared.GetComment(Avatar: cell.UserAvatar, Postid: (CurrrentPost!.id), index: indexPath.item, CurrentPost: CurrrentPost!, Content: cell.CommentContent, time: cell.CommentTime)
+        
         return cell
     }
-    
     
     // Initialize a post obeject.
     var CurrrentPost: Post?
@@ -34,6 +39,9 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
     // View didload function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        CommentsTable.delegate = self
+        CommentsTable.dataSource = self
+        
         CommentField.delegate = self
         
         // Create a scrollview that could display all image.
@@ -73,7 +81,6 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
         pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
     }
     
@@ -81,6 +88,14 @@ class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableV
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // **************** Display Comments *****************
+    @IBOutlet weak var CommentsTable: UITableView!
+    
+    
+    
+    
+    
     
     //************************ Add comments. ********************************
     @IBOutlet weak var CommentField: UITextField!

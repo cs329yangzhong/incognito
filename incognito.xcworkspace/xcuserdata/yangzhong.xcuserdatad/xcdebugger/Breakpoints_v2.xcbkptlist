@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "545201839.778178"
+            timestampString = "545342654.512175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "AddImg(_:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "ShowProfile()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/ProfileViewController.swift"
-            timestampString = "545201839.7782609"
+            timestampString = "545342654.512244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "ShowProfile()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "incognito/Viewcontrollers/DiscoverController.swift"
-            timestampString = "545236040.385674"
+            timestampString = "545341247.800034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
