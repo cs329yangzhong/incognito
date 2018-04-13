@@ -15,9 +15,31 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         super.awakeFromNib()
         // Initialization code
     }
-    
+    var post1: Post?
     var postid: String?
     var postperson: String?
+    
+    @IBOutlet weak var AnimateImg: UIImageView!
+    var Storeimg :[UIImage]?
+//    download images.
+    func downloadImges() {
+        for i in post1!.image {
+        if (i != "none") {
+            let url = URL(string: i)!
+            var CurrentImg = UIImageView.init(image: UIImage(named:"icon2"))
+            CurrentImg.kf.setImage(with: url)
+            Storeimg?.append(CurrentImg.image!)
+        }
+        }
+    }
+    
+    func animateImg() {
+        AnimateImg.animationImages = Storeimg
+        AnimateImg.animationDuration = 0.04
+        AnimateImg.animationRepeatCount = 3
+        AnimateImg.startAnimating()
+    }
+    
     
     @IBOutlet weak var Avatar: UIImageView!
     @IBOutlet weak var Username: UILabel!

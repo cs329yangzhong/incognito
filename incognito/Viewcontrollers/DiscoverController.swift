@@ -18,6 +18,7 @@ class DiscoverController: UITableViewController {
         super.viewDidLoad()
         super.title = "Discover"
         
+        
         // add refresher.
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -73,13 +74,17 @@ class DiscoverController: UITableViewController {
         cell.postperson = currentUserId
         cell.location.text = post.location
         cell.textcontent.text = post.text
+        cell.post1 = post
+        cell.downloadImges()
+        cell.animateImg()
         
         // observe the current user once and store all the basic information.
         // load the poster's avatar.
         DataStore.shared.ShowAvatarName(uid: post.uid, Avatar: cell.Avatar, Name: cell.Username)
         print(post.image)
+        
         // Download imgs and store them in cache.
-    
+        
         
         return cell
     }

@@ -264,7 +264,7 @@ class DataStore {
                                              post_id: comment_postid as! String,
                                              text: comment_text as! String,
                                              comment_by: comment_by! as! String,
-                                             time: comment_text! as! String)
+                                             time: comment_time! as! String)
                     
                     self.Comments.append(newComment)
                 }
@@ -388,7 +388,7 @@ class DataStore {
     
     // Fetch Comment details。
     func GetComment(Avatar: UIImageView, Postid: String, index: Int,
-                    CurrentPost: Post, Content: UILabel, time: UILabel ) {
+                    CurrentPost: Post, Content: UILabel, time: UILabel) {
         
         let commentID = CurrentPost.comments[index+1]
         let Comment1 = getComment(id: commentID) as! Comment

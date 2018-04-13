@@ -258,7 +258,7 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
             && (newPwdField.text)!.count >= 8 ) {
         Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["password": newPwdField.text!])
             user?.updatePassword(to: newPwdField.text!, completion: { (error) in
-                print(error!)
+                print(error?.localizedDescription)
             })
             
             
