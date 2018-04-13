@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController,     UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController,     UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource, UINavigationControllerDelegate,UITextFieldDelegate {
     
     let userID = Auth.auth().currentUser!.uid
+    
     
     //Joy- for gender picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -23,6 +24,12 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     //Joy
     @IBOutlet weak var genderField: UITextField!
     @IBOutlet weak var classField: UITextField!
+    @IBOutlet weak var emailField: UILabel!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var oldPwdField: UITextField!
+    @IBOutlet weak var newPwdField: UITextField!
+    var UserPassword: String?
+    
     var genderPicker = UIPickerView()
     var classPicker = UIPickerView()
     //Joy
@@ -30,12 +37,20 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     // ViewDidload function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make keboard dismiss
+        oldPwdField.delegate = self
+        newPwdField.delegate = self
+        
+        // set up label's corner.
+        self.emailField.layer.masksToBounds = true
+        self.emailField.layer.cornerRadius = 5
+        
         imagePicker.delegate = self
         CurrentImg.isUserInteractionEnabled = true
         ShowProfile()
         
         //Joy
-
         genderPicker.delegate = self
         genderPicker.tag = 1
         genderField.inputView = genderPicker
@@ -63,6 +78,27 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     if !snapshot.exists() { return}
     let userInfo = snapshot.value as! NSDictionary
     let profileUrl = userInfo["avatar"] as! String
+    
+    // display user name in text field
+    let userName = userInfo["username"] as! String
+    self.nameField.text = userName
+
+    // display user gender in text field
+    let userGender = userInfo["gender"] as! String
+    self.genderField.text = userGender
+    
+    // display user email in text field
+    let userEmail = userInfo["email"] as! String
+    self.emailField.text = userEmail
+    
+    // display user class in text field
+    let userClass = userInfo["class_year"] as! String
+    self.classField.text = userClass
+        
+    // get user's password.
+    let currentPwd = userInfo["password"] as! String
+    self.UserPassword = currentPwd
+
         
     // If the user has not setup avatar, use the default avatar.
     if (profileUrl == "None"){
@@ -180,7 +216,6 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         } else {
             return grades.count
         }
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -189,7 +224,6 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
         } else {
             return grades[row]
         }
-        
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -204,9 +238,48 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
     
     
     
-    @IBAction func updateGenderClass(_ sender: Any) {
-        DataStore.shared.updateGenderClass(gender: genderField.text!, classYear: classField.text!)
+    @IBAction func updateGenderClassName(_ sender: Any) {
+        DataStore.shared.updateGenderClassName(gender: genderField.text!,
+                                               classYear: classField.text!,
+                                               userName: nameField.text!)
     }
+    
+    @IBAction func updatePwd(_ sender: Any) {
+        
+        // Check whether the old Password is correct.
+        let user = Auth.auth().currentUser
+        
+        // If correct.
+        if (oldPwdField.text! == UserPassword!
+            && (newPwdField.text)!.count >= 8 ) {
+        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["password": newPwdField.text!])
+            user?.updatePassword(to: newPwdField.text!, completion: { (error) in
+                print(error?.localizedDescription)
+            })
+            
+            
+            // Confirmation for changing password.
+            let alert = UIAlertController(title: "Alert",
+                                          message: " You have successfully changed your password! ",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it", style:
+                UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+        // If False, Alert the user to retry.
+        let alert = UIAlertController(title: "Alert",
+                                      message: "Incorrect old password, You also need to enter a new password at least 8 characters ",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style:
+            UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    
     //Joy
      
     // ############ Sign out function.##########################################
@@ -223,10 +296,18 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
                 let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Signin") as! SignInViewController
                 self.present(loginVC, animated: true, completion: nil)
             }
-            
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    // if the user touched anywhere outside of the keyboard, the keyboard will hide.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     
 

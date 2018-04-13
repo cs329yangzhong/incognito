@@ -344,11 +344,12 @@ class DataStore {
     
     
     // Update user's gender and class
-    func updateGenderClass (gender: String, classYear: String) {
+    func updateGenderClassName (gender: String, classYear: String, userName: String) {
         let userID = Auth.auth().currentUser?.uid
         self.ref.child("users").child(userID!).updateChildValues(["gender" : gender])
         self.ref.child("users").child(userID!).updateChildValues(["class_year" : classYear])
-        print ("Successfully update user's gender and class")
+        self.ref.child("users").child(userID!).updateChildValues(["username" : userName])
+        print ("Successfully update user's name, gender and class")
     }
     
     // Like function.
