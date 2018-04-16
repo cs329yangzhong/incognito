@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     // Test password matching.
     if (PasswordTextField.text! != CheckPasswordTextField.text!
-        || (PasswordTextField.text?.count)! <= 8){
+        || (PasswordTextField.text?.count)! < 8){
         let alert = UIAlertController(title: "Alert",
                                       message: "You must enter the same passwords with at least 8 digits",
                                       preferredStyle: UIAlertControllerStyle.alert)

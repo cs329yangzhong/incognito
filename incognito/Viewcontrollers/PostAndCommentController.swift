@@ -12,6 +12,8 @@ import Firebase
 
 class PostAndCommentController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    // Todo: Update the refresher.
+var refresher: UIRefreshControl!
 @IBOutlet weak var UserAvatar: UIImageView!
 @IBOutlet weak var Username: UILabel!
 @IBOutlet weak var CommentNumber: UILabel!
@@ -42,7 +44,7 @@ usersRef.observeSingleEvent(of: .value, with: {
     self.UserAvatar.kf.setImage(with: url)
     
     self.Username.text = (userInfo["username"] as! String)
-    self.PostNumber.text = String((userInfo["posts"] as! [String]).count)
+    self.PostNumber.text = String((userInfo["posts"] as! [String]).count - 1)
     
 //        get Posts list by post id
     var userPostsList = [String] ()
@@ -69,6 +71,7 @@ usersRef.observeSingleEvent(of: .value, with: {
 override func viewDidLoad() {
     super.viewDidLoad()
     currentSegOption = 0
+    myTableView.reloadData()
     ObserveUser()
     // Do any additional setup after loading the view.
 }
@@ -108,11 +111,14 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 }
 
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if self.currentSegOption == 0{
+    if self.currentSegOption == 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PorfilePostTableViewCell
         
 //            cell.postImage.image = self.currentUserPosts[index]
         cell.postTimeLabel.text = self.currentUserPosts[indexPath.item].time
+        cell.UserId = self.currentUserPosts[indexPath.item].uid
+        cell.Postid = self.currentUserPosts[indexPath.item].id
+        cell.postText.text = self.currentUserPosts[indexPath.item].text
         return cell
     }
     else{

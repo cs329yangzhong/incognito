@@ -421,6 +421,45 @@ class DataStore {
         return status
     }
     
+    // ************ Delete a post. ********************
+    func deletePost(postid: String, UserId: String) {
+        
+        // Delete the post from Posts.
+        self.ref.child("posts").child(postid).removeValue()
+        
+        // Delete all comments to the corresponding post.
+        let CommentForPost = self.ref.child("comments").observeSingleEvent(of: .value,
+                            with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            if let commentList = value {
+                for p in commentList {
+                    let comment1 = p.value as! [String:Any]
+                    if comment1["comment_postid"] as! String == postid {
+                        
+                        // Remove Current's post's all comments.
+                        self.ref.child("comments").child(comment1["comment_id"] as! String).removeValue()
+                    }
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        // Delete the Post from current user's postlist.
+        let usersRef = Database.database().reference().child("users").child(UserId)
+        
+        // observe the current user once and store all the basic information.
+        usersRef.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() { return}
+            let userInfo = snapshot.value as! NSDictionary
+            let userpost = userInfo["posts"] as! [String]
+            var NewPostlist = userpost
+            NewPostlist = NewPostlist.filter{$0 != postid}
+            self.ref.child("users").child(UserId).updateChildValues(["posts" : NewPostlist])
+    })
+    }
+    
     // Fetch Comment details。
     func GetComment(Avatar: UIImageView, Postid: String, index: Int,
                     CurrentPost: Post, Content: UILabel, time: UILabel) {
