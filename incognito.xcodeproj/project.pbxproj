@@ -29,6 +29,7 @@
 		5DB337CD2077D374003DA383 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB337CC2077D374003DA383 /* PostDetailViewController.swift */; };
 		5DC3CCE7207EA26600701E51 /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3CCE6207EA26600701E51 /* CommentsCell.swift */; };
 		5DC3CCE92081341400701E51 /* PostAndCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3CCE82081341400701E51 /* PostAndCommentController.swift */; };
+		AC3EFB2B2083FC2B008FA4D6 /* PorfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3EFB2A2083FC2B008FA4D6 /* PorfilePostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		5DC3CCE6207EA26600701E51 /* CommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		5DC3CCE82081341400701E51 /* PostAndCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAndCommentController.swift; sourceTree = "<group>"; };
 		7BC2F2939EB1DD0F8CC6A8A2 /* Pods-incognito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.debug.xcconfig"; sourceTree = "<group>"; };
+		AC3EFB2A2083FC2B008FA4D6 /* PorfilePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PorfilePostTableViewCell.swift; sourceTree = "<group>"; };
 		CCE9DF3B21C0C596639EBB6F /* Pods-incognito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-incognito.release.xcconfig"; path = "Pods/Target Support Files/Pods-incognito/Pods-incognito.release.xcconfig"; sourceTree = "<group>"; };
 		EA3BA58840EAE54469BDB92D /* Pods_incognito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_incognito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -164,6 +166,7 @@
 				5D756055206ECFF8003C6B72 /* PostDetailViewCell.swift */,
 				5DC3CCE6207EA26600701E51 /* CommentsCell.swift */,
 				5D95CD4B2066E7B200AA7716 /* ImgCollectionControllerCollectionViewCell.swift */,
+				AC3EFB2A2083FC2B008FA4D6 /* PorfilePostTableViewCell.swift */,
 			);
 			path = "Tabel cells";
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC3CCE7207EA26600701E51 /* CommentsCell.swift in Sources */,
+				AC3EFB2B2083FC2B008FA4D6 /* PorfilePostTableViewCell.swift in Sources */,
 				5D95CD4A2066DFA300AA7716 /* PlaceViewController.swift in Sources */,
 				5DB337CD2077D374003DA383 /* PostDetailViewController.swift in Sources */,
 				5D9BA1B0204B5B3D005E0972 /* User.swift in Sources */,

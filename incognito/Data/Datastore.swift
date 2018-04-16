@@ -111,6 +111,19 @@ class DataStore {
         return Posts[index]
     }
     
+    func getPostByID(idArray: [String]) -> [Post]{
+        var postsListByID = [Post]()
+        for id in idArray {
+            if id == "None" {
+                continue
+            }
+            if let i = Posts.index(where: {$0.id == id}) {
+                postsListByID.append(Posts[i])
+            }
+        }
+        return postsListByID
+    }
+    
     func loadPost(){
         Posts = [Post]()
         ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -307,6 +320,28 @@ class DataStore {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    // Get All Comments to Current user.
+    func getCommentByID(UserPostList: [Post]) -> [Comment] {
+        var UserComments = [Comment]()
+        
+        // Check each post, find all comments of this post.
+        for i in UserPostList {
+            let CommentOfthisPost = i.comments
+            
+            // load the Comments with given commentID.
+            for comment in CommentOfthisPost {
+                if comment != "none" {
+                    if let found = Comments.index(where: {$0.id == comment}) {
+                        
+                        // Add it into the UsersComment array.
+                        UserComments.append(Comments[found])
+                    }
+                }
+            }
+        }
+        return UserComments
     }
     
     //  Show user's avatar.
