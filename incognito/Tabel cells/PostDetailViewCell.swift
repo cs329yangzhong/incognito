@@ -22,6 +22,7 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var AnimateImg: UIImageView!
     var Storeimg :[UIImage]?
 //    download images.
+    
     func downloadImges() {
         for i in post1!.image {
         if (i != "none") {
@@ -39,7 +40,6 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         AnimateImg.animationRepeatCount = 3
         AnimateImg.startAnimating()
     }
-    
     
     @IBOutlet weak var Avatar: UIImageView!
     @IBOutlet weak var Username: UILabel!

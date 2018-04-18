@@ -210,6 +210,26 @@ func addPost(alert: UIAlertAction!){
     print("Successfully saved post")
     self.performSegue(withIdentifier: "FinishAddingPost", sender: nil)
 }
+}
+    
+ // Convert time from string back to NSDate.
+extension String
+{
+    func toDateTime() -> NSDate
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        //Parse into NSDate
+        let dateFromString : NSDate = dateFormatter.date(from: self)! as NSDate
+        
+        //Return Parsed Date
+        return dateFromString
+    }
+}
 /*
  // MARK: - Navigation
  
@@ -222,7 +242,7 @@ func addPost(alert: UIAlertAction!){
 
 // dismiss keyboard
 
-}
+
 
 // get User's current location.
 extension AddPostViewController: GMSAutocompleteViewControllerDelegate{
@@ -253,5 +273,6 @@ func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewCont
 func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
 }
+    
 
 }

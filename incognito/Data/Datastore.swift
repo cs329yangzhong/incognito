@@ -458,6 +458,9 @@ class DataStore {
             NewPostlist = NewPostlist.filter{$0 != postid}
             self.ref.child("users").child(UserId).updateChildValues(["posts" : NewPostlist])
     })
+        // Delete Current Post from local cache.
+        Posts = Posts.filter{$0.id != postid}
+        
     }
     
     // Fetch Comment details。

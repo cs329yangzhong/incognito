@@ -68,7 +68,7 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
         cell.LikeButton.setImage(UIImage.init(named: "like"),
                                   for: .normal)
     } else {
-        cell.LikeButton.setImage(UIImage.init(named: "like_icon"),                                     for: .normal)
+        cell.LikeButton.setImage(UIImage.init(named: "like_icon"),for: .normal)
     }
     cell.postid = post.id
     cell.postperson = currentUserId
@@ -88,7 +88,6 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     
     return cell
 }
-
 
 
 

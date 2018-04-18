@@ -35,7 +35,7 @@ override func viewDidLoad() {
     scrollview.delegate = self
     scrollview.isPagingEnabled = false
     textContent.text = CurrrentPost?.text
-    scrollview.frame = CGRect(x: 17, y:144, width: 340, height: 198)
+    scrollview.frame = CGRect(x: 0, y:144, width: view.frame.width, height: 198)
     pageControl.addTarget(self, action: #selector(self.scrollViewDidScroll(_:)), for: UIControlEvents.valueChanged)
     
     if ((CurrrentPost?.image)!.count == 1){
@@ -46,7 +46,7 @@ override func viewDidLoad() {
         for i in 0...(CurrrentPost?.image)!.count-1 {
             if ((CurrrentPost?.image)![i] == "none" ) {continue}
             var IMGVIEW = UIImageView()
-            IMGVIEW.contentMode = .scaleAspectFit
+            IMGVIEW.contentMode = .scaleAspectFill
             let url = URL(string: (CurrrentPost?.image)![i])
             
             // Using KingsFisher library that can download the images and create local cache.
@@ -54,7 +54,7 @@ override func viewDidLoad() {
             
             let xPosition = self.scrollview.frame.width * CGFloat(i-1)
             IMGVIEW.frame = CGRect(x: xPosition, y: (scrollview.frame.minY/2)-scrollview.frame.height/2, width: scrollview.frame.width, height: scrollview.frame.height)
-            scrollview.contentSize.width += scrollview.frame.width
+            scrollview.contentSize.width += view.frame.width
             scrollview.addSubview(IMGVIEW)
         }
     }
@@ -62,11 +62,12 @@ override func viewDidLoad() {
 
 // Configuring the page Control.
 func configurePageControl() {
-    self.pageControl.numberOfPages = (CurrrentPost?.image)!.count
+    self.pageControl.numberOfPages = (CurrrentPost?.image)!.count-1
     self.pageControl.currentPage = 0
 }
 
 func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print(scrollView.contentOffset.x)
     pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
 }
 

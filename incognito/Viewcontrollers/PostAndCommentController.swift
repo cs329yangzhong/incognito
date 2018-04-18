@@ -14,6 +14,7 @@ class PostAndCommentController: UIViewController, UITableViewDelegate, UITableVi
 
     // Todo: Update the refresher.
 var refresher: UIRefreshControl!
+    
 @IBOutlet weak var UserAvatar: UIImageView!
 @IBOutlet weak var Username: UILabel!
 @IBOutlet weak var CommentNumber: UILabel!
@@ -74,8 +75,19 @@ override func viewDidLoad() {
     myTableView.reloadData()
     ObserveUser()
     // Do any additional setup after loading the view.
+    
+    // add refresher.
+    refresher = UIRefreshControl()
+    refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+    refresher.addTarget(self, action: #selector(PostAndCommentController.populate),
+                        for: UIControlEvents.valueChanged)
+    myTableView.addSubview(refresher)
 }
-
+    
+    @objc func populate(){
+        myTableView.reloadData()
+        refresher.endRefreshing()
+    }
 
 @IBAction func segControlAction(_ sender: Any) {
     self.currentSegOption = self.segControlTwoOptions.selectedSegmentIndex
