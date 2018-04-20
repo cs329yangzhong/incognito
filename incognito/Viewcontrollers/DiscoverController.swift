@@ -67,8 +67,10 @@ override func tableView(_ tableView: UITableView, heightForRowAt indexPath: Inde
         // The user has liked the post.
         cell.LikeButton.setImage(UIImage.init(named: "like"),
                                   for: .normal)
+        cell.LikeButton.isSelected = true
     } else {
         cell.LikeButton.setImage(UIImage.init(named: "like_icon"),for: .normal)
+        cell.LikeButton.isSelected = false
     }
     cell.postid = post.id
     cell.postperson = currentUserId

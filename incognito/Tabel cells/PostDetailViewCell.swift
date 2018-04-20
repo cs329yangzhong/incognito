@@ -27,7 +27,7 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         for i in post1!.image {
         if (i != "none") {
             let url = URL(string: i)!
-            var CurrentImg = UIImageView.init(image: UIImage(named:"icon2"))
+            let CurrentImg = UIImageView.init(image: UIImage(named:"icon2"))
             CurrentImg.kf.setImage(with: url)
             Storeimg?.append(CurrentImg.image!)
         }
@@ -49,17 +49,20 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     // Like button handler.
     @IBOutlet weak var LikeButton: UIButton!
     @IBAction func DidPressLike(_ sender: Any) {
+        
         print("Press the like button")
         
         // Check the status of the user.
         let status = DataStore.shared.DidpressLike(postid: postid!, Likeperson: postperson!)
         
         // the user canceled like.
-        if status == 0 {
+        if LikeButton.isSelected == true || status == 0{
             LikeButton.setImage(UIImage(named: "like_icon"), for: .normal)
+            LikeButton.isSelected = false
             
-        } else if status == 1 {
+        } else if status == 1 || LikeButton.isSelected == false {
             LikeButton.setImage(UIImage(named: "like"), for: .normal)
+            LikeButton.isSelected = true
         }
     }
     

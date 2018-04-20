@@ -13,7 +13,6 @@ class ProfileViewController: UIViewController,     UIImagePickerControllerDelega
 
 let userID = Auth.auth().currentUser!.uid
 
-
 //Joy- for gender picker
 func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -331,8 +330,5 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 // if the user touched anywhere outside of the keyboard, the keyboard will hide.
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
-}
-
-
-
+    }
 }

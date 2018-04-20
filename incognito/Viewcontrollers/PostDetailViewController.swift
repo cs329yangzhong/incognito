@@ -75,7 +75,11 @@ func configurePageControl() {
     self.pageControl.numberOfPages = (CurrrentPost?.image)!.count-1
     self.pageControl.currentPage = 0
 }
-
+// Change page by clicking page point.
+func changePage(sender: AnyObject) -> () {
+    let x = CGFloat(self.pageControl.currentPage) * self.scrollview.frame.size.width
+    self.scrollview.setContentOffset(CGPoint(x:x, y:0), animated: true)
+}
 func scrollViewDidScroll(_ scrollView: UIScrollView) {
     print(scrollView.contentOffset.x)
     pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
