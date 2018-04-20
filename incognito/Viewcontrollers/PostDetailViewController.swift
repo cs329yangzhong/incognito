@@ -12,7 +12,6 @@ import Firebase
 
 class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-
 // Initialize a post obeject.
 var CurrrentPost: Post?
 
@@ -29,6 +28,13 @@ override func viewDidLoad() {
     CommentsTable.delegate = self
     CommentsTable.dataSource = self
     CommentField.delegate = self
+    
+    // add refresher.
+    refresher = UIRefreshControl()
+    refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+    refresher.addTarget(self, action: #selector(DiscoverController.populate),
+                        for: UIControlEvents.valueChanged)
+    CommentsTable.addSubview(refresher)
     
     // Create a scrollview that could display all image.
     configurePageControl()
@@ -58,6 +64,10 @@ override func viewDidLoad() {
             scrollview.addSubview(IMGVIEW)
         }
     }
+}
+@objc func populate(){
+    CommentsTable.reloadData()
+    refresher.endRefreshing()
 }
 
 // Configuring the page Control.
@@ -101,7 +111,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     let comment_maker = Auth.auth().currentUser?.uid
     let comment_content = CommentField.text
     let comment_time = "None"
-    
+    if (comment_content != ""){
     let newcomment = Comment(id: "random",
                              post_id:  PostId!,
                              text: comment_content!,
@@ -110,11 +120,14 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     
     DataStore.shared.addComment(comment: newcomment)
     print("finish adding Comment")
+    }
+    let alert = UIAlertController(title: "Alert",
+                                  message: "You did not comment any words",
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "ok", style:
+        UIAlertActionStyle.default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
 }
-
-//********* Todo: write the the get current time function. ***************
-
-
 
 // dismiss keyboard
 // when click the return, the keyboard will hide automatically.

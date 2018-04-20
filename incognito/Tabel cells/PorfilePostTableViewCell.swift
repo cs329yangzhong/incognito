@@ -14,6 +14,7 @@ class PorfilePostTableViewCell: UITableViewCell, UIAlertViewDelegate {
     var UserId: String?
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postTimeLabel: UILabel!
+    @IBOutlet weak var Postimage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -45,7 +45,7 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var textcontent: UILabel!
-    
+    @IBOutlet weak var morePictureIndicator: UILabel!
     // Like button handler.
     @IBOutlet weak var LikeButton: UIButton!
     @IBAction func DidPressLike(_ sender: Any) {
@@ -56,11 +56,9 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         
         // the user canceled like.
         if status == 0 {
-            LikeButton.setImage(UIImage(named: "like_icon"), for: .highlighted)
             LikeButton.setImage(UIImage(named: "like_icon"), for: .normal)
             
         } else if status == 1 {
-            LikeButton.setImage(UIImage(named: "like"), for: .highlighted)
             LikeButton.setImage(UIImage(named: "like"), for: .normal)
         }
     }

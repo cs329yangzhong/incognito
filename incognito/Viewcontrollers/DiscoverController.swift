@@ -55,7 +55,7 @@ override func tableView(_ tableView: UITableView, heightForRowAt indexPath: Inde
     return 365.0;//Choose your custom row height
 }
 
-override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath) as! PostDetailViewCell
     let post = DataStore.shared.getPost(index: indexPath.item)
@@ -75,21 +75,19 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     cell.location.text = post.location
     cell.textcontent.text = post.text
     cell.post1 = post
-    cell.downloadImges()
-    cell.animateImg()
+//    cell.downloadImges()
+        if post.image.count >= 2 {
+            let url = URL(string: (post.image)[1])
+            cell.AnimateImg.kf.setImage(with: url)
+        }
     
     // observe the current user once and store all the basic information.
     // load the poster's avatar.
     DataStore.shared.ShowAvatarName(uid: post.uid, Avatar: cell.Avatar, Name: cell.Username)
     print(post.image)
     
-    // Download imgs and store them in cache.
-    
-    
     return cell
 }
-
-
 
 /*
 // Override to support conditional editing of the table view.

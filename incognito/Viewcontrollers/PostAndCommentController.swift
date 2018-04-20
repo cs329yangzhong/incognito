@@ -131,6 +131,10 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         cell.UserId = self.currentUserPosts[indexPath.item].uid
         cell.Postid = self.currentUserPosts[indexPath.item].id
         cell.postText.text = self.currentUserPosts[indexPath.item].text
+        if self.currentUserPosts[indexPath.item].image.count >= 2 {
+            let url = URL(string: (self.currentUserPosts[indexPath.item].image)[1])
+            cell.postImage.kf.setImage(with: url)
+        }
         return cell
     }
     else{
