@@ -51,7 +51,7 @@ override func viewDidLoad() {
         // Show the pictures in a scrollview.
         for i in 0...(CurrrentPost?.image)!.count-1 {
             if ((CurrrentPost?.image)![i] == "none" ) {continue}
-            var IMGVIEW = UIImageView()
+            let IMGVIEW = UIImageView()
             IMGVIEW.contentMode = .scaleAspectFill
             let url = URL(string: (CurrrentPost?.image)![i])
             
@@ -124,13 +124,14 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     
     DataStore.shared.addComment(comment: newcomment)
     print("finish adding Comment")
-    }
-    let alert = UIAlertController(title: "Alert",
+    } else {
+        let alert = UIAlertController(title: "Alert",
                                   message: "You did not comment any words",
                                   preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "ok", style:
+        alert.addAction(UIAlertAction(title: "ok", style:
         UIAlertActionStyle.default, handler: nil))
     self.present(alert, animated: true, completion: nil)
+    }
 }
 
 // dismiss keyboard

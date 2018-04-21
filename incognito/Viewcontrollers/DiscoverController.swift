@@ -163,7 +163,6 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool = false) -> String {
     } else {
         return "Just now"
     }
-    
 }
 
 
