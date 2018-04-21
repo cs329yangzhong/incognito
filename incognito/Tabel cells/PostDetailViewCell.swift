@@ -45,6 +45,7 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var textcontent: UILabel!
+    @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var morePictureIndicator: UILabel!
     // Like button handler.
     @IBOutlet weak var LikeButton: UIButton!

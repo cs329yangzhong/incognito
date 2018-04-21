@@ -191,11 +191,11 @@ func autocompleteClicked(action: UIAlertAction){
 }
 
 func addPost(alert: UIAlertAction!){
-    let now = Date()
+    let date = Date()
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone.current
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    let dateString = formatter.string(from: now)
+    let dateString = formatter.string(from: date)
     
     let id = Auth.auth().currentUser?.uid
     let post = Post(id: "random",
@@ -207,7 +207,8 @@ func addPost(alert: UIAlertAction!){
                     like: ["none"],
                     comments: ["none"])
     DataStore.shared.addPost(post: post, ImgList: ImgList)
-    print("Successfully saved post")
+//    print("Successfully saved post")
+    print(dateString)
     self.performSegue(withIdentifier: "FinishAddingPost", sender: nil)
 }
 }
