@@ -391,7 +391,7 @@ class DataStore {
     func DidpressLike( postid: String, Likeperson: String) -> Int{
 
         // 0 means cancel liked. 1 means didlike.
-        var status = 0
+        var status = 1
         let currentPost = self.ref.child("posts").child(postid)
         
         // observe the current post once and store all the basic information.
@@ -405,13 +405,15 @@ class DataStore {
             if Likelist.contains(Likeperson){
                 NewLikelist = NewLikelist.filter{$0 != Likeperson}
                 status = 0
-            print("User dislikes the post")
+            print("User dislikes the post and the status is \(status)")
+                
                 
             // The user has not liked the post. Click to like.
             } else {
                 NewLikelist.append(Likeperson)
                 status = 1
-                print(" User Liked the post")
+                print(" User Liked the post and the status is \(status)")
+                
             }
             
             self.ref.child("posts").child(postid).updateChildValues(["post_like" : NewLikelist])

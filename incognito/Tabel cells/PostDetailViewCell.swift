@@ -55,15 +55,17 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         
         // Check the status of the user.
         let status = DataStore.shared.DidpressLike(postid: postid!, Likeperson: postperson!)
-        
+//        print(status)
+//        print(LikeButton.isSelected)
         // the user canceled like.
         if LikeButton.isSelected == true || status == 0{
             LikeButton.setImage(UIImage(named: "like_icon"), for: .normal)
             LikeButton.isSelected = false
             
-        } else if status == 1 || LikeButton.isSelected == false {
+        } else if LikeButton.isSelected == false && status == 1 {
             LikeButton.setImage(UIImage(named: "like"), for: .normal)
             LikeButton.isSelected = true
+            
         }
     }
     
