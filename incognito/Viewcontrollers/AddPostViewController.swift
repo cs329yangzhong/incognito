@@ -56,6 +56,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
     return cell
 }
 
+
 var ImgList = [UIImage]()
 var CurrentImg: UIImage?
 

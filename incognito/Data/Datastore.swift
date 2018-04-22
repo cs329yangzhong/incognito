@@ -109,6 +109,7 @@ class DataStore {
     
     func getPost(index: Int) -> Post{
         return Posts[index]
+        
     }
     
     func getPostByID(idArray: [String]) -> [Post]{
@@ -294,6 +295,7 @@ class DataStore {
         // define array of key/value pairs to store for this comment.
         let key = self.ref.child("comments").childByAutoId().key
         let postid = comment.post_id
+        comment.id = key
         
         // define array of key/value pairs to store for this comment.
         let commentRecord = [
@@ -309,6 +311,10 @@ class DataStore {
         
         // also save to our internal array, to stay in sync with what's in Firebase
         Comments.append(comment)
+        print("the last comment is \(Comments[Comments.count-1].id)")
+        if let found = Posts.index(where: {$0.id == postid}){
+            Posts[found].comments.append(key)
+        }
         
         // Update the user's post's comments list.
         ref.child("posts").child(postid).child("post_comment").observeSingleEvent(of: .value, with: { (snapshot) in

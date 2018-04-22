@@ -81,7 +81,6 @@ func changePage(sender: AnyObject) -> () {
     self.scrollview.setContentOffset(CGPoint(x:x, y:0), animated: true)
 }
 func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print(scrollView.contentOffset.x)
     pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
 }
 
