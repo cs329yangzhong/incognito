@@ -13,7 +13,8 @@ import Firebase
 class PostDetailViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
 // Initialize a post obeject.
-var CurrrentPost: Post?
+var CurrentPostIndex: Int?
+
 
 @IBOutlet weak var textContent: UILabel!
 @IBOutlet weak var scrollview: UIScrollView!
@@ -21,9 +22,11 @@ var CurrrentPost: Post?
 
 var contentWidth:CGFloat = 0.0
 var refresher: UIRefreshControl!
-
+var CurrentPost: Post?
+    
 // View didload function.
 override func viewDidLoad() {
+    CurrentPost = DataStore.shared.getPost(index: CurrentPostIndex!)
     super.viewDidLoad()
     CommentsTable.delegate = self
     CommentsTable.dataSource = self
@@ -32,7 +35,7 @@ override func viewDidLoad() {
     // add refresher.
     refresher = UIRefreshControl()
     refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
-    refresher.addTarget(self, action: #selector(DiscoverController.populate),
+    refresher.addTarget(self, action: #selector(PostDetailViewController.populate),
                         for: UIControlEvents.valueChanged)
     CommentsTable.addSubview(refresher)
     
@@ -40,20 +43,20 @@ override func viewDidLoad() {
     configurePageControl()
     scrollview.delegate = self
     scrollview.isPagingEnabled = false
-    textContent.text = CurrrentPost?.text
+    textContent.text = CurrentPost?.text
     scrollview.frame = CGRect(x: 0, y:144, width: view.frame.width, height: 198)
     pageControl.addTarget(self, action: #selector(self.scrollViewDidScroll(_:)), for: UIControlEvents.valueChanged)
     
-    if ((CurrrentPost?.image)!.count == 1){
+    if ((CurrentPost?.image)!.count == 1){
         scrollview.isHidden = true
     }else{
         
         // Show the pictures in a scrollview.
-        for i in 0...(CurrrentPost?.image)!.count-1 {
-            if ((CurrrentPost?.image)![i] == "none" ) {continue}
+        for i in 0...(CurrentPost?.image)!.count-1 {
+            if ((CurrentPost?.image)![i] == "none" ) {continue}
             let IMGVIEW = UIImageView()
             IMGVIEW.contentMode = .scaleAspectFill
-            let url = URL(string: (CurrrentPost?.image)![i])
+            let url = URL(string: (CurrentPost?.image)![i])
             
             // Using KingsFisher library that can download the images and create local cache.
             IMGVIEW.kf.setImage(with: url)
@@ -72,7 +75,7 @@ override func viewDidLoad() {
 
 // Configuring the page Control.
 func configurePageControl() {
-    self.pageControl.numberOfPages = (CurrrentPost?.image)!.count-1
+    self.pageControl.numberOfPages = (CurrentPost?.image)!.count-1
     self.pageControl.currentPage = 0
 }
 // Change page by clicking page point.
@@ -92,15 +95,15 @@ override func didReceiveMemoryWarning() {
 // **************** Display Comments *****************
 @IBOutlet weak var CommentsTable: UITableView!
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return CurrrentPost!.comments.count - 1
+    return CurrentPost!.comments.count - 1
 }
 
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentsCell
-    print(CurrrentPost!.comments)
+    print(CurrentPost!.comments)
     
-    DataStore.shared.GetComment(Avatar: cell.UserAvatar, Postid: (CurrrentPost!.id), index: indexPath.item, CurrentPost: CurrrentPost!, Content: cell.CommentContent, time: cell.CommentTime)
+    DataStore.shared.GetComment(Avatar: cell.UserAvatar, Postid: (CurrentPost!.id), index: indexPath.item, CurrentPost: CurrentPost!, Content: cell.CommentContent, time: cell.CommentTime)
     
     return cell
 }
@@ -110,7 +113,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 @IBOutlet weak var CommentField: UITextField!
 
 @IBAction func AddComment(_ sender: Any) {
-    let PostId = CurrrentPost?.id
+    let PostId = CurrentPost?.id
     let comment_maker = Auth.auth().currentUser?.uid
     let comment_content = CommentField.text
     let comment_time = "None"

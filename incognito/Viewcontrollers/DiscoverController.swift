@@ -217,7 +217,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow {
         
             let post = DataStore.shared.getPost(index: indexPath.item)
-            seg.CurrrentPost = post
+            seg.CurrentPostIndex = indexPath.item
             }
         }
     }

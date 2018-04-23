@@ -430,7 +430,7 @@ class DataStore {
     }
     
     // ************ Delete a post. ********************
-    func deletePost(postid: String, UserId: String) {
+    func deletePost(postid: String, UserId: String) -> Void {
         
         // Delete the post from Posts.
         self.ref.child("posts").child(postid).removeValue()

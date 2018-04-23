@@ -628,6 +628,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lPq-2M-Lke">
                                 <rect key="frame" x="16" y="219" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="cjM-Y7-ZYd"/>
                                 </constraints>
@@ -650,6 +651,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="VFE-DH-zKI"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="jCP-bQ-l7C" appends="YES" id="uFs-u8-o1F"/>
+                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -665,6 +669,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="uYz-u2-Qss" id="IbR-q2-yPR"/>
+                                    <outletCollection property="gestureRecognizers" destination="jCP-bQ-l7C" appends="YES" id="rj0-Md-ClE"/>
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrV-QM-TgN">
@@ -716,6 +721,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXn-PC-Pfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="jCP-bQ-l7C">
+                    <connections>
+                        <action selector="longPressDeleteWith_sender:" destination="uYz-u2-Qss" id="dK0-T6-7qD"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2408.8000000000002" y="-1577.3613193403301"/>
         </scene>

@@ -49,14 +49,37 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
     
     // get a reference to our storyboard cell
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identity, for: indexPath as IndexPath) as! ImgCollectionControllerCollectionViewCell
-    
     // Use the outlet in our custom class to get a reference to the UILabel in the cell
     cell.displayContent(img: ImgList[indexPath.row])
     cell.backgroundColor = UIColor.cyan // make cell more visible in our example project
     return cell
 }
-
-
+//add long press gesture to delete image cell from collection view
+@IBAction func longPressDelete(_sender : UILongPressGestureRecognizer) {
+    let point = _sender.location(in: MyCollection)
+    let indexPath = MyCollection?.indexPathForItem(at: point)
+    //        let cell = self.collectionView?.cellForItem(at: indexPath!)
+    if indexPath != nil
+    {
+        let alertActionCell = UIAlertController(title: "Delete Image!", message: "Are you sure to delete the selected image?", preferredStyle: .actionSheet)
+        
+        // Configure Remove Item Action
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            self.ImgList.remove(at: indexPath!.row)
+            print("Cell Removed")
+            self.MyCollection.reloadData()
+        })
+        
+        // Configure Cancel Action Sheet
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { acion in
+            print("Cancel actionsheet")
+        })
+        
+        alertActionCell.addAction(deleteAction)
+        alertActionCell.addAction(cancelAction)
+        self.present(alertActionCell, animated: true, completion: nil)
+        }
+    }
 var ImgList = [UIImage]()
 var CurrentImg: UIImage?
 

@@ -26,6 +26,7 @@ var refresher: UIRefreshControl!
 var currentSegOption = 0
 var currentUserPosts = [Post]()
 var commentLists = [Comment]()
+var deletePlanetIndexPath: NSIndexPath? = nil
 
 // Keep observing Current user's details.
 func ObserveUser() {
@@ -162,7 +163,52 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         return cell
     }
 }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if self.currentSegOption == 0{
+        if editingStyle == .delete {
+            _ = self.currentUserPosts[indexPath.item].uid
+            _ = self.currentUserPosts[indexPath.item].id
+            confirmDelete()
+            }
+    }
+}
+    
+    func confirmDelete() {
+    let alert = UIAlertController(title: "Delete Post", message: "Are you sure you want to permanently delete this post?", preferredStyle: .actionSheet)
+    
+        let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler:handleDeletePlanet)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeletePlanet)
+    
+    alert.addAction(DeleteAction)
+    alert.addAction(CancelAction)
+    
+    // Support display in iPad
+    alert.popoverPresentationController?.sourceView = self.view
+//    alert.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+    
+    self.present(alert, animated: true, completion: nil)
+}
+    
+    func handleDeletePlanet(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deletePlanetIndexPath {
+            myTableView.beginUpdates()
+            let deleteUserid = self.currentUserPosts[indexPath.item].uid
+            let deletePostid = self.currentUserPosts[indexPath.item].id
+            DataStore.shared.deletePost(postid: deletePostid, UserId: deleteUserid)
+            
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            myTableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
+            deletePlanetIndexPath = nil
+            myTableView.endUpdates()
+        }
+    }
+    func cancelDeletePlanet(alertAction: UIAlertAction!) {
+        deletePlanetIndexPath = nil
+    }
 /*
 // MARK: - Navigation
 
