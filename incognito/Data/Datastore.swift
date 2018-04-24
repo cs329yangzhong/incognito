@@ -116,11 +116,15 @@ class DataStore {
         var postsListByID = [Post]()
         for id in idArray {
             if id == "None" {
-                continue
+                //print("y")
+                //continue
             }
-            if let i = Posts.index(where: {$0.id == id}) {
+            else if let i = Posts.index(where: {$0.id == id}) {
                 postsListByID.append(Posts[i])
+                //print("gg")
             }
+            //print("id: \(id)")
+            //print(Posts.index(where: {$0.id == id}))
         }
         return postsListByID
     }
@@ -231,7 +235,7 @@ class DataStore {
                 }
             }
         }
-        
+        post.id = key
         // Also save to our internal array, to stay in sync with what's in Firebase.
         Posts.append(post)
     }
@@ -434,6 +438,7 @@ class DataStore {
         
         // Delete the post from Posts.
         self.ref.child("posts").child(postid).removeValue()
+        
         
         // Delete all comments to the corresponding post.
         let CommentForPost = self.ref.child("comments").observeSingleEvent(of: .value,

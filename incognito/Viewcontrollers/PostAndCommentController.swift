@@ -28,6 +28,7 @@ var currentUserPosts = [Post]()
 var commentLists = [Comment]()
 var deletePlanetIndexPath: NSIndexPath? = nil
 
+
 // Keep observing Current user's details.
 func ObserveUser() {
     let usersRef = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
@@ -53,7 +54,7 @@ usersRef.observeSingleEvent(of: .value, with: {
     userPostsList = userInfo["posts"] as! [String]
 //        print(self.userPostsList)
     self.currentUserPosts = DataStore.shared.getPostByID(idArray: userPostsList)
-    
+    print(userPostsList.count)
 //        get Comments List
     
     self.commentLists = DataStore.shared.getCommentByID(UserPostList: self.currentUserPosts)
@@ -86,12 +87,14 @@ override func viewDidLoad() {
 }
     
     @objc func populate(){
+//        ObserveUser()
         myTableView.reloadData()
         refresher.endRefreshing()
     }
 
 @IBAction func segControlAction(_ sender: Any) {
     self.currentSegOption = self.segControlTwoOptions.selectedSegmentIndex
+    
     myTableView.reloadData()
     
 }
@@ -115,11 +118,13 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
     if self.currentSegOption == 0{
 //            return self.currentUserPosts.count
         CountofRows = self.currentUserPosts.count
+        
     }
     else if self.currentSegOption == 1{
 //            return self.commentLists.count
         CountofRows = self.commentLists.count
     }
+    
     return CountofRows
 }
 
@@ -137,8 +142,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             cell.postImage.kf.setImage(with: url)
         }
         return cell
-    }
-    else{
+        
+    } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentsCell
         let comment = commentLists[indexPath.item]
         cell.CommentTime.text = comment.time
@@ -172,6 +177,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         if editingStyle == .delete {
             _ = self.currentUserPosts[indexPath.item].uid
             _ = self.currentUserPosts[indexPath.item].id
+            deletePlanetIndexPath = indexPath as NSIndexPath
             confirmDelete()
             }
     }
@@ -195,20 +201,24 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     
     func handleDeletePlanet(alertAction: UIAlertAction!) -> Void {
         if let indexPath = deletePlanetIndexPath {
-            myTableView.beginUpdates()
+            
             let deleteUserid = self.currentUserPosts[indexPath.item].uid
             let deletePostid = self.currentUserPosts[indexPath.item].id
+            print(deletePostid)
+            print(deleteUserid)
             DataStore.shared.deletePost(postid: deletePostid, UserId: deleteUserid)
             
             // Note that indexPath is wrapped in an array:  [indexPath]
-            myTableView.deleteRows(at: [indexPath as IndexPath], with: .automatic)
             deletePlanetIndexPath = nil
-            myTableView.endUpdates()
+            
+            myTableView.reloadData()
         }
     }
     func cancelDeletePlanet(alertAction: UIAlertAction!) {
         deletePlanetIndexPath = nil
     }
+    
+    
 /*
 // MARK: - Navigation
 
