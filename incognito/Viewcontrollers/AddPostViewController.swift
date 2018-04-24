@@ -240,7 +240,7 @@ func addPost(alert: UIAlertAction!){
  // Convert time from string back to NSDate.
 extension String
 {
-    func toDateTime() -> NSDate
+    func toDateTime() -> Date
     {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
@@ -252,7 +252,7 @@ extension String
         let dateFromString : NSDate = dateFormatter.date(from: self)! as NSDate
         
         //Return Parsed Date
-        return dateFromString
+        return dateFromString as Date
     }
 }
 /*

@@ -82,6 +82,7 @@ override func tableView(_ tableView: UITableView, heightForRowAt indexPath: Inde
         let url = URL(string: (post.image)[1])
         cell.AnimateImg.kf.setImage(with: url)
     }
+        
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
     dateFormatter.timeZone = TimeZone.current

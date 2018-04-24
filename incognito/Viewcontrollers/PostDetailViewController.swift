@@ -24,6 +24,7 @@ var contentWidth:CGFloat = 0.0
 var refresher: UIRefreshControl!
 var CurrentPost: Post?
     
+    
 // View didload function.
 override func viewDidLoad() {
     CurrentPost = DataStore.shared.getPost(index: CurrentPostIndex!)
@@ -113,10 +114,16 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 @IBOutlet weak var CommentField: UITextField!
 
 @IBAction func AddComment(_ sender: Any) {
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone.current
+    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+    let dateString = formatter.string(from: date)
+    
     let PostId = CurrentPost?.id
     let comment_maker = Auth.auth().currentUser?.uid
     let comment_content = CommentField.text
-    let comment_time = "None"
+    let comment_time = dateString
     if (comment_content != ""){
     let newcomment = Comment(id: "random",
                              post_id:  PostId!,
@@ -147,4 +154,22 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
 }
+}
+
+extension String
+{
+    func toDateTime() -> NSDate
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        //Parse into NSDate
+        let dateFromString : NSDate = dateFormatter.date(from: self)! as NSDate
+        
+        //Return Parsed Date
+        return dateFromString
+    }
 }
