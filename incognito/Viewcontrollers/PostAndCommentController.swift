@@ -163,7 +163,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             let UserUrl = userInfo["avatar"] as! String
             url1 = URL(string: (UserUrl))
             })
-        cell.UserAvatar.kf.setImage(with: url1, placeholder: UIImage(named: "icon2"))
+        cell.UserAvatar.kf.setImage(with: url1)
+        
         return cell
     }
 }

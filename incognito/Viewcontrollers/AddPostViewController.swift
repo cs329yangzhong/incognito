@@ -235,6 +235,19 @@ func addPost(alert: UIAlertAction!){
     print(dateString)
     self.performSegue(withIdentifier: "FinishAddingPost", sender: nil)
 }
+    
+// dismiss keyboard
+// when click the return, the keyboard will hide automatically.
+func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+    return false
+}
+
+// if the user touched anywhere outside of the keyboard, the keyboard will hide.
+override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+}
+
 }
     
  // Convert time from string back to NSDate.
@@ -264,8 +277,6 @@ extension String
  // Pass the selected object to the new view controller.
  }
  */
-
-// dismiss keyboard
 
 
 
