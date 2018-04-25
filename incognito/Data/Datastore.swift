@@ -530,7 +530,7 @@ class DataStore {
 
         })
     }
-    
+
     func timeAgoSinceDate(_ date:Date, numericDates:Bool = false) -> String {
         let calendar = Calendar.current
         let unitFlags: Set<Calendar.Component> = [.minute, .hour, .day, .weekOfYear, .month, .year, .second]
@@ -592,5 +592,43 @@ class DataStore {
         } else {
             return "Just now"
         }
+    }
+    
+    func GetCommentForProfile(UserAvatar: UIImageView, CommentContent: UILabel, CommentTime: UILabel, comment: Comment) {
+        
+        let commentUser = comment.comment_by
+        
+        CommentContent.text = comment.text
+        //        get comment time and display
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.timeZone = TimeZone.current
+        let commentTime = dateFormatter.date(from: comment.time)
+        //    let lastUpate = post.time as? Date
+        if commentTime != nil{
+            CommentTime.text = timeAgoSinceDate(commentTime!)
+            //        print(timeAgoSinceDate(lastUpdate!))
+        }
+        else{
+            CommentTime.text = comment.time
+        }
+        //            time.text = Comment1.time as! String
+
+        // Fetch Comment user's avatar.
+        let usersRef = self.ref.child("users").child(commentUser)
+        
+        // observe the current user once and store all the basic information.
+        usersRef.observeSingleEvent(of: .value, with: {
+            snapshot in
+            if !snapshot.exists() { return}
+            let userInfo = snapshot.value as! NSDictionary
+            
+            // Using KingFisher to download and save avatar.
+            let UserUrl = userInfo["avatar"] as! String
+            let url = URL(string: (UserUrl))
+            UserAvatar.kf.setImage(with: url)
+            print("show comment avatar")
+            
+        })
     }
 }

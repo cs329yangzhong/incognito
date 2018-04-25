@@ -144,26 +144,39 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         return cell
         
     } else {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "profileCommentCell", for: indexPath) as! ProfileCommentTableViewCell
         let comment = commentLists[indexPath.item]
+        print("the comment time is \(comment.time)")
+        
         cell.CommentTime.text = comment.time
         cell.CommentContent.text = comment.text
-        
+
+        print("comment by \(comment.comment_by)")
         // Download userAvatar.
         let usersRef = Database.database().reference().child("users").child(comment.comment_by)
-        var url1: URL?
+
+//        var url1: URL?
         // observe the current user once and store all the basic information.
         usersRef.observeSingleEvent(of: .value, with: {
             snapshot in
-            
+
             if !snapshot.exists() { return }
             let userInfo = snapshot.value as! NSDictionary
-            
+
             // Using KingFisher to download and save avatar.
             let UserUrl = userInfo["avatar"] as! String
-            url1 = URL(string: (UserUrl))
+
+
+            if (UserUrl == "None"){
+                cell.UserAvatar.image = UIImage(named: "icon2")
+                return
+            }
+
+            let url1 = URL(string: (UserUrl))
+            print("UserUrl is \(url1!)")
+            cell.UserAvatar.kf.setImage(with: url1!,placeholder: UIImage(named: "icon2"))
             })
-        cell.UserAvatar.kf.setImage(with: url1)
+       
         
         return cell
     }
