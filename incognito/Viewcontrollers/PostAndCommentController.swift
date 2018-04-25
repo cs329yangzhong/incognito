@@ -87,7 +87,7 @@ override func viewDidLoad() {
 }
     
     @objc func populate(){
-//        ObserveUser()
+        ObserveUser()
         myTableView.reloadData()
         refresher.endRefreshing()
     }
@@ -151,20 +151,19 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         
         // Download userAvatar.
         let usersRef = Database.database().reference().child("users").child(comment.comment_by)
-        
+        var url1: URL?
         // observe the current user once and store all the basic information.
         usersRef.observeSingleEvent(of: .value, with: {
             snapshot in
             
-            if !snapshot.exists() { return}
+            if !snapshot.exists() { return }
             let userInfo = snapshot.value as! NSDictionary
-            
             
             // Using KingFisher to download and save avatar.
             let UserUrl = userInfo["avatar"] as! String
-            let url = URL(string: (UserUrl))
-            cell.UserAvatar.kf.setImage(with: url,placeholder: UIImage(named: "icon2"))
+            url1 = URL(string: (UserUrl))
             })
+        cell.UserAvatar.kf.setImage(with: url1, placeholder: UIImage(named: "icon2"))
         return cell
     }
 }
@@ -207,7 +206,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
             print(deletePostid)
             print(deleteUserid)
             DataStore.shared.deletePost(postid: deletePostid, UserId: deleteUserid)
-            
+            ObserveUser()
             // Note that indexPath is wrapped in an array:  [indexPath]
             deletePlanetIndexPath = nil
             

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import Kingfisher
 
 class DataStore {
     
@@ -330,6 +331,7 @@ class DataStore {
         }) { (error) in
             print(error.localizedDescription)
         }
+        Comments.append(comment)
     }
     
     // Get All Comments to Current user.
@@ -373,17 +375,21 @@ class DataStore {
             }
             
             // Download the avatar from firebase and update the poster's avatar.
-            let storageRef = Storage.storage().reference(forURL: profileUrl)
-            storageRef.downloadURL(completion: { (url, error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                    return
-                }else{
-                    let data = NSData(contentsOf: url!)
-                    let image = UIImage(data: data! as Data)
-                    Avatar.image = image
-                }
-            })
+//            let storageRef = Storage.storage().reference(forURL: profileUrl)
+//            storageRef.downloadURL(completion: { (url, error) in
+//                if let error = error{
+//                    print(error.localizedDescription)
+//                    return
+//                }else{
+//                    let data = NSData(contentsOf: url!)
+//                    let image = UIImage(data: data! as Data)
+//                    Avatar.image = image
+//                }
+//            })
+            
+            // Implementation on downloading user avatar.
+            let url = URL(string: (profileUrl))
+            Avatar.kf.setImage(with: url,placeholder: UIImage(named: "icon2"))
         })
     }
     
@@ -438,16 +444,18 @@ class DataStore {
         
         // Delete the post from Posts.
         self.ref.child("posts").child(postid).removeValue()
-        
+        var localcomments = [String]()
         
         // Delete all comments to the corresponding post.
-        let CommentForPost = self.ref.child("comments").observeSingleEvent(of: .value,
+        _ = self.ref.child("comments").observeSingleEvent(of: .value,
                             with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             if let commentList = value {
                 for p in commentList {
                     let comment1 = p.value as! [String:Any]
+                    
+                    localcomments.append(comment1["comment_id"] as! String)
                     if comment1["comment_postid"] as! String == postid {
                         
                         // Remove Current's post's all comments.
@@ -457,6 +465,11 @@ class DataStore {
             }
         }) { (error) in
             print(error.localizedDescription)
+        }
+        
+        // Delete comments in local cache.
+        for c in localcomments {
+            self.Comments = self.Comments.filter{$0.id != c}
         }
         
         // Delete the Post from current user's postlist.
@@ -473,7 +486,6 @@ class DataStore {
     })
         // Delete Current Post from local cache.
         Posts = Posts.filter{$0.id != postid}
-        
     }
     
     // Fetch Comment details。
@@ -514,6 +526,7 @@ class DataStore {
             let UserUrl = userInfo["avatar"] as! String
             let url = URL(string: (UserUrl))
             Avatar.kf.setImage(with: url)
+            print("show comment avatar")
 
         })
     }
