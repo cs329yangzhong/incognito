@@ -28,6 +28,9 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var textcontent: UILabel!
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var morePictureIndicator: UILabel!
+    @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var commentCount: UILabel!
+    
     // Like button handler.
     @IBOutlet weak var LikeButton: UIButton!
     @IBAction func DidPressLike(_ sender: Any) {
@@ -36,16 +39,21 @@ class PostDetailViewCell: UITableViewCell, UIScrollViewDelegate {
         
         // Check the status of the user.
         let status = DataStore.shared.DidpressLike(postid: postid!, Likeperson: postperson!)
-//        print(status)
-//        print(LikeButton.isSelected)
+
         // the user canceled like.
+        var likeNumber = Int(likeCount.text!)!
         if LikeButton.isSelected == true || status == 0{
             LikeButton.setImage(UIImage(named: "like_icon"), for: .normal)
             LikeButton.isSelected = false
+            likeNumber -= 1
+            likeCount.text = String(likeNumber)
+            
             
         } else if LikeButton.isSelected == false && status == 1 {
             LikeButton.setImage(UIImage(named: "like"), for: .normal)
             LikeButton.isSelected = true
+            likeNumber += 1
+            likeCount.text = String(likeNumber)
             
         }
     }

@@ -77,6 +77,8 @@ override func tableView(_ tableView: UITableView, heightForRowAt indexPath: Inde
     cell.location.text = post.location
     cell.textcontent.text = post.text
     cell.post1 = post
+    cell.likeCount.text = String(post.like.count-1)
+    cell.commentCount.text = String(post.comments.count-1)
 //    cell.downloadImges()
     if post.image.count >= 2 {
         let url = URL(string: (post.image)[1])

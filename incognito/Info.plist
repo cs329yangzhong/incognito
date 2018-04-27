@@ -40,6 +40,10 @@
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>use location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>use photo library</string>
+	<key>Privacy - Camera Usage Description </key>
+	<string>use your camera</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

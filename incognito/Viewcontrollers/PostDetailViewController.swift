@@ -113,7 +113,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 //************************ Add comments. ********************************
 @IBOutlet weak var CommentField: UITextField!
 
-@IBAction func AddComment(_ sender: Any) {
+func addComment(alert: UIAlertAction!){
     let date = Date()
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone.current
@@ -125,22 +125,36 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     let comment_content = CommentField.text
     let comment_time = dateString
     if (comment_content != ""){
-    let newcomment = Comment(id: "random",
-                             post_id:  PostId!,
-                             text: comment_content!,
-                             comment_by: comment_maker!,
-                             time: comment_time)
-    
-    DataStore.shared.addComment(comment: newcomment)
-    print("finish adding Comment")
+        let newcomment = Comment(id: "random",
+                                 post_id:  PostId!,
+                                 text: comment_content!,
+                                 comment_by: comment_maker!,
+                                 time: comment_time)
+        
+        DataStore.shared.addComment(comment: newcomment)
+        print("finish adding Comment")
+    CommentField.text = ""
     } else {
         let alert = UIAlertController(title: "Alert",
-                                  message: "You did not comment any words",
-                                  preferredStyle: UIAlertControllerStyle.alert)
+                                      message: "You did not comment any words",
+                                      preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "ok", style:
+            UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    }
+
+@IBAction func AddComment(_ sender: Any) {
+    let alert = UIAlertController(title: "Alert",
+                                  message: "Are you sure to send comment? ",
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    
+    alert.addAction(UIAlertAction(title: "Yes", style:
+        UIAlertActionStyle.default, handler: addComment))
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style:
         UIAlertActionStyle.default, handler: nil))
     self.present(alert, animated: true, completion: nil)
-    }
 }
 
 // dismiss keyboard

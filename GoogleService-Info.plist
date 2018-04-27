@@ -38,7 +38,7 @@
 	<string>https://incognito-ea48b.firebaseio.com</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>use photos</string>
-	<key>NSCameraUsageDescription</key>
+	<key>Privacy - Camera Usage Description </key>
 	<string>Use camera</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Always use location</string>
