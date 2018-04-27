@@ -134,6 +134,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         
 //            cell.postImage.image = self.currentUserPosts[index]
         cell.postTimeLabel.text = self.currentUserPosts[indexPath.item].time
+            print(self.currentUserPosts[indexPath.item].time)
+
         cell.UserId = self.currentUserPosts[indexPath.item].uid
         cell.Postid = self.currentUserPosts[indexPath.item].id
         cell.postText.text = self.currentUserPosts[indexPath.item].text

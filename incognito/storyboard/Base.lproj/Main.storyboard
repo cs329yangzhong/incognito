@@ -800,7 +800,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn3-JW-tzx">
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn3-JW-tzx">
                                             <rect key="frame" x="16" y="78" width="331" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="lCy-Wu-lt7"/>
@@ -1293,6 +1293,8 @@
                                 <rect key="frame" x="142" y="50" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="tVY-Wl-fRQ"/>
+                                    <constraint firstAttribute="width" constant="90" id="x0l-Yh-nMi"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="yx7-ja-04L"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -1341,7 +1343,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-cf-qFo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-cf-qFo">
                                                     <rect key="frame" x="12" y="41" width="61" height="141"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="61" id="Yjt-aB-4Y3"/>

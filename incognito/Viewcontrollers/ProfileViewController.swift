@@ -107,6 +107,8 @@ self.UserPassword = currentPwd
 if (profileUrl == "None"){
     self.CurrentImg.image = UIImage(named: "icon2")
 }else{
+    
+    // Use KF to downlaod user avatar.
     let storageRef = Storage.storage().reference(forURL: profileUrl)
     storageRef.downloadURL(completion: { (url, error) in
     if let error = error{
@@ -116,6 +118,7 @@ if (profileUrl == "None"){
         let data = NSData(contentsOf: url!)
         let image = UIImage(data: data! as Data)
         self.CurrentImg.image = image
+        
         }
     })
     }
