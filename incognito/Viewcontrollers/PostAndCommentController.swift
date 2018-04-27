@@ -146,16 +146,17 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "profileCommentCell", for: indexPath) as! ProfileCommentTableViewCell
         let comment = commentLists[indexPath.item]
+        
         print("the comment time is \(comment.time)")
         
         cell.CommentTime.text = comment.time
         cell.CommentContent.text = comment.text
-
         print("comment by \(comment.comment_by)")
+        
         // Download userAvatar.
         let usersRef = Database.database().reference().child("users").child(comment.comment_by)
-
-//        var url1: URL?
+        var cellURL: URL?
+        
         // observe the current user once and store all the basic information.
         usersRef.observeSingleEvent(of: .value, with: {
             snapshot in
@@ -169,18 +170,18 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
             if (UserUrl == "None"){
                 cell.UserAvatar.image = UIImage(named: "icon2")
-                return
+                
+            }else{
+                
+            cellURL = URL(string: (UserUrl))
+            print("UserUrl is \(cellURL!)")
+            cell.UserAvatar.kf.setImage(with: cellURL!, placeholder: UIImage(named: "icon2"))
             }
-
-            let url1 = URL(string: (UserUrl))
-            print("UserUrl is \(url1!)")
-            cell.UserAvatar.kf.setImage(with: url1!,placeholder: UIImage(named: "icon2"))
             })
-       
         
         return cell
+        }
     }
-}
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
