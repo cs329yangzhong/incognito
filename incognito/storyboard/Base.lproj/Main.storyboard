@@ -926,7 +926,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="white" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="WAx-ya-7Gg">
                                 <rect key="frame" x="17" y="144" width="340" height="198"/>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" defersCurrentPageDisplay="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q7v-A2-IUP">
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" defersCurrentPageDisplay="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q7v-A2-IUP">
                                 <rect key="frame" x="168" y="315" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1004,7 +1004,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a comment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="my8-O9-GvD">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="comment" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a comment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="my8-O9-GvD">
                                 <rect key="frame" x="22" y="560" width="249" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -1060,7 +1060,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_signin6" translatesAutoresizingMaskIntoConstraints="NO" id="95N-Kg-H2b">
-                                <rect key="frame" x="0.0" y="28" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="590"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW5-Q7-J0z">
@@ -1212,20 +1212,6 @@
                                     <action selector="ShowOldPwd:" destination="eX6-F2-bzV" eventType="touchUpInside" id="1xv-lR-LoB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nJ-oc-zOA">
-                                <rect key="frame" x="13" y="497" width="349" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Sign Out"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="Logout:" destination="eX6-F2-bzV" eventType="touchUpInside" id="Onp-K3-4j2"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWO-Qk-Uac">
                                 <rect key="frame" x="156" y="340" width="64" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1243,8 +1229,22 @@
                                 <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nJ-oc-zOA">
+                                <rect key="frame" x="13" y="516" width="349" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Sign Out"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="Logout:" destination="eX6-F2-bzV" eventType="touchUpInside" id="Onp-K3-4j2"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="GUz-GC-ieS"/>
                     </view>
@@ -1252,7 +1252,6 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="CurrentImg" destination="hXK-UP-LP7" id="XVR-SV-1SD"/>
                         <outlet property="classField" destination="kl5-uv-1TZ" id="mpI-Yp-KKu"/>
@@ -1344,9 +1343,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-cf-qFo">
-                                                    <rect key="frame" x="12" y="41" width="61" height="141"/>
+                                                    <rect key="frame" x="12" y="41" width="53" height="141"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="61" id="Yjt-aB-4Y3"/>
+                                                        <constraint firstAttribute="width" constant="53" id="Yjt-aB-4Y3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1381,9 +1380,9 @@
                                                 <constraint firstItem="Qea-xn-u6I" firstAttribute="top" secondItem="AFN-mt-dfS" secondAttribute="top" constant="103" id="ali-hF-f5J"/>
                                                 <constraint firstItem="Qea-xn-u6I" firstAttribute="bottom" secondItem="AFN-mt-dfS" secondAttribute="bottomMargin" constant="-51" id="aqK-wb-hso"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ycg-2n-re9" secondAttribute="bottom" constant="271" id="eJY-Bl-dcz"/>
-                                                <constraint firstItem="Qea-xn-u6I" firstAttribute="leading" secondItem="yAM-cf-qFo" secondAttribute="trailing" constant="8" id="gWv-QJ-Hpr"/>
+                                                <constraint firstItem="Qea-xn-u6I" firstAttribute="leading" secondItem="yAM-cf-qFo" secondAttribute="trailing" constant="16" id="gWv-QJ-Hpr"/>
                                                 <constraint firstItem="yAM-cf-qFo" firstAttribute="leading" secondItem="AFN-mt-dfS" secondAttribute="leadingMargin" constant="-3" id="jNS-rv-mUK"/>
-                                                <constraint firstItem="Ycg-2n-re9" firstAttribute="leading" secondItem="yAM-cf-qFo" secondAttribute="trailing" constant="8" symbolic="YES" id="yVF-HH-xbi"/>
+                                                <constraint firstItem="Ycg-2n-re9" firstAttribute="leading" secondItem="yAM-cf-qFo" secondAttribute="trailing" constant="16" id="yVF-HH-xbi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5XG-fA-ras" secondAttribute="trailing" constant="-10" id="zYm-uL-hk6"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1583,6 +1582,7 @@
         <image name="wallpaper" width="640" height="1136"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Ek3-yW-js6"/>
         <segue reference="G46-JA-RMv"/>
         <segue reference="wjO-qC-Z7y"/>
         <segue reference="nbg-eP-0CS"/>

@@ -27,6 +27,7 @@ var CurrentPost: Post?
     
 // View didload function.
 override func viewDidLoad() {
+
     CurrentPost = DataStore.shared.getPost(index: CurrentPostIndex!)
     super.viewDidLoad()
     CommentsTable.delegate = self
@@ -47,6 +48,7 @@ override func viewDidLoad() {
     textContent.text = CurrentPost?.text
     scrollview.frame = CGRect(x: 0, y:144, width: view.frame.width, height: 198)
     pageControl.addTarget(self, action: #selector(self.scrollViewDidScroll(_:)), for: UIControlEvents.valueChanged)
+    pageControl.addTarget(self, action: #selector (self.changePage(sender:)), for: .touchUpInside)
     
     if ((CurrentPost?.image)!.count == 1){
         scrollview.isHidden = true
@@ -69,6 +71,7 @@ override func viewDidLoad() {
         }
     }
 }
+    
 @objc func populate(){
     CommentsTable.reloadData()
     refresher.endRefreshing()
@@ -79,13 +82,15 @@ func configurePageControl() {
     self.pageControl.numberOfPages = (CurrentPost?.image)!.count-1
     self.pageControl.currentPage = 0
 }
+    
 // Change page by clicking page point.
-func changePage(sender: AnyObject) -> () {
+    @objc func changePage(sender: UIPageControl) -> Void {
     let x = CGFloat(self.pageControl.currentPage) * self.scrollview.frame.size.width
     self.scrollview.setContentOffset(CGPoint(x:x, y:0), animated: true)
 }
+
 func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(337))
+    pageControl.currentPage = Int(scrollView.contentOffset.x / CGFloat(self.view.frame.width))
 }
 
 override func didReceiveMemoryWarning() {
@@ -168,6 +173,34 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
 }
+
+    
+// Try to hide keyboard.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == CommentField {
+            animateViewMoving(up: true, moveValue: 216)
+            print("GOOD")
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == CommentField {
+            animateViewMoving(up: false, moveValue: 216)
+            print("bad")
+        }
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration: TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx:0, dy:movement)
+        UIView.commitAnimations()
+    }
 }
 
 extension String
@@ -187,3 +220,7 @@ extension String
         return dateFromString
     }
 }
+
+//Move the keyboard while adding comments.
+
+
