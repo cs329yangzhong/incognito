@@ -14,11 +14,12 @@ class DiscoverController: UITableViewController {
 
 var refresher: UIRefreshControl!
 
-override func viewDidLoad() {
+    
+    override func viewDidLoad() {
     super.viewDidLoad()
     super.title = "Discover"
-    
-    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "post"), style: .done, target: self, action: #selector(addTapped))
+
     // add refresher.
     refresher = UIRefreshControl()
     refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -27,14 +28,17 @@ override func viewDidLoad() {
     tableView.addSubview(refresher)
 }
 
+
 var total_post = DataStore.shared.countPost()
 @objc func populate(){
     tableView.reloadData()
     refresher.endRefreshing()
 }
-override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+@objc func addTapped(_ sender: UIBarButtonItem) {
+    // Do something
+    let storyboard = UIStoryboard(name: "Main", bundle:nil)
+    let initialView = storyboard.instantiateViewController(withIdentifier: "addPostVC")
+    self.present(initialView, animated: true, completion: nil)
 }
 
 // MARK: - Table view data source.
@@ -208,6 +212,7 @@ override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexP
 // MARK: - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
